@@ -1,0 +1,6 @@
+<p class="bold">Assessment Title:</p>
+<p>{{assDetails.title}} - {{assDetails.yearID}}</p>
+<p class="bold">Assessment Guide:</p>
+<div [innerHTML]="assDetails.guide | safeHtml" class="tiny_page"></div>
+<p class="bold">Assessment Objectives</p>
+<div [innerHTML]="assDetails.objectives | safeHtml" class="tiny_page"></div>

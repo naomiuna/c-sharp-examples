@@ -1,0 +1,107 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("user-assessments")'>Assessments</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToAssessmentDetails()'>Assessments Details</a>
+            </li>
+            <li *ngIf="sectionDetails.sectionCount > 1">
+                <a href="JavaScript:void(0);" (click)='goToSectionDetails()'>Section
+                  {{userAssessmentSectionDetails.sectionNumber}}</a>
+              </li>
+              <li *ngIf="sectionDetails.sectionCount === 1">
+                  <a href="JavaScript:void(0);" (click)='goToSectionDetails()'>
+                      {{userAssessmentSectionDetails.sectionTitle}}</a>
+              </li>
+            <li>
+              <span>Questions</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <div class="flex__between">
+            <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+            <h5><span *ngIf="sectionDetails.sectionCount > 1">Section {{userAssessmentSectionDetails.sectionNumber}} - </span>{{userAssessmentSectionDetails.sectionTitle}}</h5>
+            <countdown-timer *ngIf="sectionDetails.isEoQualification" [TIME_LIMIT]="userSecTimeLimit" [TIME_PASSED]="userSecTimePassed" (timerComponent)="getTimerData($event)"></countdown-timer>
+          </div>
+        </div>
+        <div *ngIf="actionPending" class="divider__block__small">
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+        <div *ngIf="!actionPending" class="divider__block__small">
+          <!-- <p class="bold">Questions <span *ngIf="!!questionDetails.groupName">- {{questionDetails.groupName}}</span></p> -->
+          <div class="col col__spansix">
+            <div id="question__count" class="question gutter__medium" data-id="{{maxSelections}}">
+              <h5>Question {{questionDetails.number}}</h5>
+              <p style="font-size: 1.2em">{{questionDetails.title}}</p>
+              <p *ngIf="maxSelections > 1" class="bold">Please make {{maxSelections}} answer choices</p>
+              <p *ngIf="answerViewModel.answerIDs.length > maxSelections" class="error error__message">Only {{maxSelections}} option(s) can be selected.</p>
+              <div *ngIf="!isMultipleGuess" class="row divider__block__small">
+                  <div class="col col__spantwelve">
+                      <div class="col__evenpad">
+                          <a href="JavaScript:void(0);" (click)='setSingleAnswer(1)' 
+                            class="btn btn__question" [ngClass]="{'button__active':answerViewModel.answerID === 1}">Yes</a>
+                      </div>
+                  </div>
+                  <div class="col col__spantwelve">
+                      <div class="col__evenpad">
+                          <a href="JavaScript:void(0);" (click)='setSingleAnswer(0)' 
+                            class="btn btn__question" [ngClass]="{'button__active':answerViewModel.answerID === 0}">No</a>
+                      </div>
+                  </div>
+              </div>
+              <div *ngIf="isMultipleGuess" class="row divider__block__small">
+                <div *ngFor="let answer of questionDetails.answers; let idx = index;" class="col col__col__spantwelve">
+                  <div class="col__evenpad">
+                    <a href="JavaScript:void(0);" (click)='setMultiAnswer(answer.id)' 
+                      class="btn btn__question" [ngClass]="{'button__active':isSelectedMultiAnswer(answer.id)}">{{answer.title}}</a>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="((!isMultipleGuess) || (isMultipleGuess && answerViewModel.answerIDs.length === maxSelections))" class="row">
+                <div class="col col__spansix col__offbysix">
+                  <div class="col__evenpad">
+                    <a href="JavaScript:void(0);" (click)='saveAnswer()' class="btn btn__details" style="margin-top: 20px;">Next</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="endModal" class="endModalWrapper">
+                <div class="modalContent">
+                    <h3>Your Time Has Ended.</h3>
+                    <p>Your current result will be logged. If you have not gained full marks you will be able to retake the section again.</p>
+                    <!-- NEED TO REDIRECT SOMEWHERE HERE -->
+                    <a (click)="timerEnded()" id="endSubmit" class="submit">View Summary</a>
+                </div>
+            </div>
+            <div id="confirmLeaveModal" class="confirmLeaveModalWrapper">
+              <div class="modalContent">
+                  <span id="cancelModal" (click)="noLeave()" class="close">&times;</span>
+                  <h3>Are You Sure?</h3>
+                  <p>Leaving this page will stop your exam.</p>
+                  <div>
+                      <a id="yesLeave" (click)="yesLeave()" class="submit">Yes</a>
+                      <a id="noLeave" (click)="noLeave()" class="cancel">No</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

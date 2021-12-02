@@ -1,0 +1,81 @@
+<div class="listing">
+
+  <div *ngFor="let section of searchModel.items" class="list__item assessment">
+    <div class="row">
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <h5>Section {{section.number}}: {{section.reference}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <div class="details">
+            <p>{{section.title}}</p>
+            <p>
+              <span *ngIf="section.isRandom">Select questions randomly ({{section.quantity}})</span>
+              <span *ngIf="!section.isRandom">Select all questions</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <div class="assessments__buttons">
+            <a href="JavaScript:void(0);" (click)="editSectionItem(section.id)" class="btn btn__details">Edit Details</a>
+            <a href="JavaScript:void(0);" (click)="deleteSectionItem(section.id)" class="btn btn__standard delete trigger__modal"
+              data-modaltype="del_section_modal">Delete Section</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)"
+          class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+        <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)"
+          class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>
+
+<section id="myModal" class="modal" data-modaltype="del_section_modal">
+  <div id="modal__content">
+    <span class="closeModal">&times;</span>
+    <h2>Delete Section</h2>
+    <p>Are you sure you want to delete this section?</p>
+    <div class="row buttons">
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDeleteSectionItem()' class="btn btn__standard delete">Delete
+              Section</a>
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+      </div>
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <a href="#" class="btn btn__standard cancel">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

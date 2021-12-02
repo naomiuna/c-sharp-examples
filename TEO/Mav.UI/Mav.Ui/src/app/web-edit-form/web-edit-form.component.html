@@ -1,0 +1,65 @@
+<div class="page__header">
+  <img src="/assets/images/icons/assessments.svg" alt="Edit Page Details" />
+  <h5>Edit Page <span>{{pageDetails.pageInfo.title}}</span></h5>
+</div>
+<p>Please manage the invigilator account details below:</p>
+<form [formGroup]="editPageForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Page details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <input type="hidden" id="hdnApiBaseUrl" value="{{apiBaseUrl}}" />
+  <input type="hidden" id="hdnAuthorityUrl" value="{{authorityUrl}}" />
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Page Title<em>*</em></label>
+              <input type="text" class="primary" name="PageTitle" id="PageTitle" placeholder="Please enter a page title"
+                [formControl]="editPageForm.controls['PageTitle']" />
+              <validation-message fieldName="PageTitle"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Page Contemnt<em>*</em></label>
+              <angular-tinymce [formControl]="editPageForm.controls['Description']" [settings]="customEditorSettings"></angular-tinymce>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Published<em>*</em></label>
+              <mat-slide-toggle
+                  (change)="changePublished($event)"
+                  class="example-margin"
+                  [checked]="isPublished">
+                  Published?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Web Content
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

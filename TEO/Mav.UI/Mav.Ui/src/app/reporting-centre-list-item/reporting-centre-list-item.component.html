@@ -1,0 +1,35 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Centre Number</h5>
+          <p>{{centre.number}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Centre Name</h5>
+          <p>{{centre.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Creation Date</h5>
+          <p>{{centre.createdOn | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">View Report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

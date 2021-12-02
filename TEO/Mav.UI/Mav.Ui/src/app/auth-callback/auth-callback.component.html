@@ -1,0 +1,50 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <span>Processing Authentication</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/users.svg" alt="Processing authentication" />
+          <h5>Processing Authentication</h5>
+        </div>
+        <div class="row">
+          <div class="col col__spansix">
+            <div class="row row__negative20">
+              <div class="col col__spantwelve" data-type="main">
+                <div class="col__evenpad">
+                  <div class="formrow fill cf">
+                    <p *ngIf="isError == false">
+                      Processing authentication...
+                    </p>
+                    <div *ngIf="isError == true">
+                      <p>An error has occurred during your authentication process. Please try again by
+                        clicking on the button below:</p>
+                      <p><strong>{{authResponse}}</strong></p>
+                      <div>
+                        <button class="btn btn__standard" type="button" (click)="retryHandshake()">
+                          Please retry again
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,13 @@
+@model RedirectViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+<div class="page__header">
+    <h5>You are now being returned to the application.</h5>
+</div>
+<p>Once complete, you may close this tab</p>
+
+<meta http-equiv="refresh" content="0;url=@Model.RedirectUrl" data-url="@Model.RedirectUrl">
+<script src="~/js/signin-redirect.js"></script>

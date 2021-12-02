@@ -1,0 +1,30 @@
+<div class="list__item_nano assessment">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <h5>Section {{section.number}}</h5>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="details">
+          <p class="no__margin bold">{{section.title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="details">
+          <p class="no__margin"><span class="bold">Status: </span><span>{{section.statusID | assessmentsectionstatus}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="details">
+          <p class="no__margin bold">Score: {{section.totalScore}}/{{section.totalQuestions}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Assessment Title</p>
+          <p>{{assessment.title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Academic Year</p>
+          <p>{{assessment.yearID}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Assessment Status</p>
+          <p>
+            <span>{{assessment.statusID | assessmentstatus}}</span>
+            <span *ngIf="!!assessment.submittedOn"> ({{assessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info down">
+          <a href="JavaScript:void(0);" (click)="viewSectionDetails()" class="btn btn__accordion view__assessment">View
+            Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a *ngIf="!!assessment.submittedOn" href="JavaScript:void(0);" (click)="viewCerfificate()" class="btn btn__details">View Certificate</a>
+          <a *ngIf="assessment.submittedOn === null" href="JavaScript:void(0);" class="btn btn__details btn_disabled">View Certificate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="displayDetails" class="assessment__content">
+  <hr/>
+  <div *ngIf="userHasConfirmation()">
+      <div  class="tabcontent">
+        <div class="row">
+            <div class="col col__spaneight col__offbytwo">
+              <div class="table__wrapper">
+                <table *ngFor="let section of searchModel.items">
+                  <tr >
+                    <td width="30%"><b>Section {{section.number}}</b></td>
+                    <td width="25%">Status: {{section.statusID | assessmentsectionstatus}}</td>
+                    <td width="20%">Attempts: {{section.attempts}}</td>
+                    <td width="25%">Score: {{section.totalScore}} / {{section.totalQuestions}}</td>
+                  </tr>
+                  <tr>
+                    <td><a *ngIf="section.statementID" href="javascript:void(0);" class="btn btn__accordion" (click)="toggleStatement(section)">Confirmation Statement</a></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                      <p class="bold tertiary no__margin">Total Score {{totalScore}} / {{totalQuestions}}</p>
+                    </td>
+                  </tr>
+                  <tr *ngIf="section.statementID && section.showStatement" >
+                    <td colspan="4">
+                        <app-confirmation-statement [statementID]="section.statementID" [userID]="userID"></app-confirmation-statement>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+    </div>
+ 
+  </div>
+</div>

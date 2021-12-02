@@ -1,0 +1,20 @@
+<div class="row" *ngIf="displaySuccessMessage">
+  <div class="alert alert-account-success" *ngIf="displaySuccessMessage">
+    <strong>Success!</strong> {{successMessage}}
+  </div>
+</div>
+<div class="row">
+  <div class="col col__spantwelve">
+    <div class="col__evenpad">
+      <div *ngIf="activeTab === 1">
+        <app-officers-list [id]="id" (officerActionRequest)="officerEventRaised($event)"></app-officers-list>
+      </div>
+      <div *ngIf="activeTab === 2">
+        <app-add-officer [id]="id" (officerActionRequest)="officerEventRaised($event)"></app-add-officer>
+      </div>
+      <div *ngIf="activeTab === 3">
+        <app-edit-officer [id]="editKey" (officerActionRequest)="officerEventRaised($event)"></app-edit-officer>
+      </div>
+    </div>
+  </div>
+</div>

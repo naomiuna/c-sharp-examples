@@ -1,0 +1,49 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToAssessmentDetails()'>Assessment Details</a>
+            </li>
+            <li>
+              <span *ngIf="sectionDetails.sectionCount > 1">Section</span> <span>Overview</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+            <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+            <h5><span *ngIf="sectionDetails.sectionCount > 1">Section {{sectionDetails.number}} -</span> {{sectionDetails.title}}</h5>
+        </div>
+        <div class="row divider__block__small">
+          <div class="col col__spantwelve">
+            <div class="col__evenpad">
+              <div class="height__check">
+                <p class="bold"><span *ngIf="sectionDetails.sectionCount > 1">Section </span>Information - {{sectionDetails.reference}}</p>
+                <div [innerHTML]="sectionDetails.information | safeHtml" class="tiny_page"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!!userAssessmentSection && userAssessmentSection.statusID < 3" class="row">
+          <div class="col col__spanfour col__offbyfour">
+            <div class="col__evenpad">
+              <a *ngIf="!sectionDetails.statementID" href="JavaScript:void(0);" (click)='goToAssessmentQuestions()' class="btn btn__details">Next</a>
+              <a *ngIf="sectionDetails.statementID" href="JavaScript:void(0);" (click)='goToAssessmentStatement()' class="btn btn__details">Next</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

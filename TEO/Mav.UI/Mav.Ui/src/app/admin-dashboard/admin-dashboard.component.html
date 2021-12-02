@@ -1,0 +1,91 @@
+<div id="full__wrapper">
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <h2 class="tertiary align__center">Admin <span class="primary">Dashboard</span></h2>
+        </div>
+        <div class="row">
+
+          <div class="col col__spanfour">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/web")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Web Content" />
+                  <h6 class="primary align__center no__margin">Web Content</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/centres")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Centre Management" />
+                  <h6 class="primary align__center no__margin">Centre Management</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/assessments")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+                  <h6 class="primary align__center no__margin">Assessments</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/users")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Admin Users" />
+                  <h6 class="primary align__center no__margin">Admin Users</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/report-dashboard")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Reporting" />
+                  <h6 class="primary align__center no__margin">Reporting</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/licence-management")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Settings" />
+                  <h6 class="primary align__center no__margin">Licence Management</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spanfour" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/settings")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Settings" />
+                  <h6 class="primary align__center no__margin">Settings</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,61 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Organisation Name</h5>
+          <p>{{organisation.organisationName}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Academic Year</h5>
+          <p>
+            <span *ngIf="licence === true">
+              <p>{{organisation.licence.academicYear}}</p>
+            </span>
+            <span *ngIf="licence === false">
+              <p>N/A</p>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Payment Status</h5>
+          <p>
+            <span *ngIf="licence === true">
+              <span *ngIf="organisation.licence.paid === true" class="true">Paid</span>
+              <span *ngIf="organisation.licence.paid === false" class="false">Not Paid</span>
+            </span>
+            <span *ngIf="licence === false">
+              <p>N/A</p>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Licence Status</h5>
+          <p>
+              <span *ngIf="licence === true" class="true">Active</span>
+              <span *ngIf="licence === false" class="false">Not Active</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree col__offbyone">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">View Organisation Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

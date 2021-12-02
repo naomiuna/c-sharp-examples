@@ -1,0 +1,36 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Page Title</h5>
+          <p>{{page.title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Published</h5>
+          <p *ngIf="page.published === true"><span class="true">true</span></p>
+          <p *ngIf="page.published === false"><span class="false">false</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Last Modified</h5>
+          <p>{{page.modifiedOn | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">Edit Page Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

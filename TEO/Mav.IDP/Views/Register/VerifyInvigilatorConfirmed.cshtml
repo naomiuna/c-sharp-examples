@@ -1,0 +1,23 @@
+﻿@model VerifyInvigilatorViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="welcome-page">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4>Registration: Verification</h4>
+            @if (Model.Success)
+            {
+                <p>
+                    <strong>Thank you!</strong> Your account has been successfully verified.
+                </p>
+                <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn__standard">Click here to log-in now</a>
+            }
+            else
+            {
+                <p><strong>Error!</strong> There was an issue during your account verification.</p>
+            }
+        </div>
+    </div>
+</div>

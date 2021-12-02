@@ -1,0 +1,56 @@
+<form [formGroup]="createCentreTypeForm" (ngSubmit)="saveChanges()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Centre type details have been successfully created.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Code<em>*</em></label>
+              <input type="text" class="primary" name="Code" id="Code" placeholder="Please enter a centre code value"
+                [formControl]="createCentreTypeForm.controls['Code']" maxlength="10" />
+              <validation-message fieldName="Code"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Name<em>*</em></label>
+              <input type="text" class="primary" name="Name" id="Name" placeholder="Please enter a centre type name"
+                [formControl]="createCentreTypeForm.controls['Name']" maxlength="100" />
+              <validation-message fieldName="Name"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Max Centre Invigilators (leave blank or set to 0 to inherit from global settings)</label>
+              <input type="number" class="primary" name="MaxInvigilators" id="MaxInvigilators" placeholder="The maximum number of allowable invigilators per centre"
+                [formControl]="createCentreTypeForm.controls['MaxInvigilators']" maxlength="6" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

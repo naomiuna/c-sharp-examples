@@ -1,0 +1,46 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Assessment Title</h5>
+          <p>{{assessment.title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Academic Year</h5>
+          <p>{{assessment.yearID}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Active</h5>
+          <p>
+            <span *ngIf="assessment.published === true" class="true">true</span>
+            <span *ngIf="assessment.published === false" class="false">false</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Creation Date</h5>
+          <p>{{assessment.createdOn | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">Assessment Report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

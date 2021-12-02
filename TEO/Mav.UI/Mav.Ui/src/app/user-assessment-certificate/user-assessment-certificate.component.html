@@ -1,0 +1,64 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("user-assessments")'>Assessments</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToAssessmentDetails()'>Assessment Details</a>
+            </li>
+            <li>
+              <span>Print Certificate</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+          <h5>Print Certificate</h5>
+        </div>
+        <div class="listing divider__block__small">
+          <div id="certificate__frame" class="list__item">
+            <div class="certificate align__center">
+              <img class="alt__logo" src="/assets/images/logos/main__logo__simple.png" alt="Logo" />
+              <h2 class="no__margin">{{certificateModel.userName}}</h2>
+              <h4 class="tertiary">{{certificateModel.centreName}}</h4>
+              <p class="alt">Has achieved the following score in the following area:</p>
+              <p class="bold no__margin">{{certificateModel.assessmentName}}</p>
+              <p class="alt">{{certificateModel.yearDisplay}}</p>
+              <h4>Score {{certificateModel.totalScore}}/{{certificateModel.maxScore}}</h4>
+              <div class="logos">
+                <img class="examLogo" src="/assets/images/logos/exam__training.png" alt="ExamTraining" />
+                <img class="ocrLogo" src="/assets/images/logos/ocr__logo.png" alt="OCR" />
+                <img class="pearsonLogo" src="/assets/images/logos/pearson__logo.png" alt="Pearson" />
+              </div>
+              <p class="obtained no__margin">Certificate obtained {{certificateModel.submittedOn | date:
+                'dd/MM/yyyy'}}</p>
+            </div>
+          </div>
+          <div *ngIf="!actionPending" class="row divider__block__small">
+            <div class="col col__spansix col__offbythree">
+              <div class="col__evenpad">
+                <button type="button" class="btn btn__details margin__bottom btn__print__pdf">
+                  Save as PDF
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,26 @@
+<div class="row divider__block__admin__small">
+  <div class="col col col__spansix">
+    <h5>Centre Types</h5>
+  </div>
+  <div class="col col col__spansix">
+    <a href="JavaScript:void(0);" (click)='goToComponent("admin/settings/centretype/create")' class="btn btn__admin__sub right">+ Add a new
+      Centre Type</a>
+  </div>
+</div>
+<div class="listing">
+
+  <app-settings-centretype-list-item *ngFor="let setting of searchModel" [setting]="setting"></app-settings-centretype-list-item>
+
+  <div class="list__item" *ngIf="searchModel.length === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

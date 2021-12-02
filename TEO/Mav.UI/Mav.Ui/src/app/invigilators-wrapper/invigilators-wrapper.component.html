@@ -1,0 +1,101 @@
+<div id="options" class="row divider__block__small">
+  <div class="col col__spanthree">
+    <a href="JavaScript:void(0);" class="btn btn__add btn_disabled">
+      Invigilator Totals ({{centreTotals.currentTotal}}/{{centreTotals.maxAllowed}})
+    </a>
+  </div>
+  <div class="col col__spantwo col__offbyfour">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setSearchField($event.target.value)">
+          <option [value]="1">Search Surname</option>
+          <option [value]="2">Search Email</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="displayYearFilter" class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setYear($event.target.value)" class="grey">
+          <option selected value="0">Filter by Academic Year</option>
+          <option *ngFor="let year of yearList" value="{{year.yearID}}">
+            {{year.display}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spanthree">
+    <div class="col__evenpad">
+      <div class="search">
+        <div class="search__wrapper">
+          <input class="search__bar" type="search" name="searchTerms" #searchTerms />
+          <a href="JavaScript:void(0);" (click)="newSearch(searchTerms)" class="search__icon"><img src="/assets/images/icons/search.svg"
+              alt="Search" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="listing">
+
+  <div *ngFor="let user of searchModel.items" class="list__item">
+    <div class="row">
+      <div class="col col__spanfour">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <h5>{{user.firstName}} {{user.surname}}</h5>
+            <p>{{user.email}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col col__spanfour">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <h5>Latest Assessment</h5>
+            <p *ngIf="!!user.latestAssessment">{{user.latestAssessment.title}}</p>
+            <p *ngIf="user.latestAssessment === null">N/A</p>
+          </div>
+        </div>
+      </div>
+      <div class="col col__spanfour">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <h5>Assessment Completion</h5>
+            <p *ngIf="!!user.latestAssessment">
+              <span>{{user.latestAssessment.statusID | assessmentstatus}}</span>
+              <span *ngIf="!!user.latestAssessment.submittedOn"> ({{user.latestAssessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+            </p>
+            <p *ngIf="user.latestAssessment === null">N/A</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)"
+          class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+        <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)"
+          class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>

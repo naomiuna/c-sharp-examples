@@ -1,0 +1,148 @@
+<form [formGroup]="editSectionStatementForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Statement details have been successfully saved.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <input type="hidden" id="hdnApiBaseUrl" value="{{apiBaseUrl}}" />
+  <input type="hidden" id="hdnAuthorityUrl" value="{{authorityUrl}}" />
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Statement Number<em>*</em></label>
+              <input type="number" class="primary" name="Number" id="Number"
+                placeholder="Please enter a statement number"
+                [formControl]="editSectionStatementForm.controls['Number']" />
+              <validation-message fieldName="Number"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Statement<em>*</em></label>
+              <angular-tinymce [formControl]="editSectionStatementForm.controls['Content']"
+                [settings]="customEditorSettings"></angular-tinymce>
+              <validation-message fieldName="Content"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="row" *ngIf="addQuestionActive">
+  <div class="col col__spantwelve">
+    <h5>Add Question</h5>
+    <form [formGroup]="addSectionStatementQuestionForm" (ngSubmit)="submitQuestionForm()" class="fill__form no__margin__bottom">
+      <div class="row">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Question Title<em>*</em></label>
+              <input type="text" class="primary" name="Title" id="Title" placeholder="Please enter a question title"
+                [formControl]="addSectionStatementQuestionForm.controls['Title']" />
+              <validation-message fieldName="Title"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spansix">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Active?</label>
+              <mat-slide-toggle (change)="changeQuestionActive($event)" class="example-margin" [checked]="questionActive">
+                Active?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="formrow fill cf">
+          <div class="col col__spantwelve">
+              <button class="btn btn__standard" type="submit">
+                Save Question
+              </button>
+            </div>
+      </div>
+      <div class="formrow fill cf">
+            <div class="col col__spantwelve">
+              <button class="btn btn__standard btn__cancel" type="button" (click)="cancelQuestion()">
+                Cancel
+              </button>
+            </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+      <div class="row" *ngIf="!addQuestionActive">
+        <div class="col col__spantwelve">
+          <div class="col col__spansix">
+            <a href="JavaScript:void(0);" (click)='addQuestion()' class="btn btn__add">Add a new Question</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing" *ngIf="!addQuestionActive">
+
+          <div *ngFor="let question of questionList; let i = index" class="list__item assessment">
+              <div class="row">
+                <div class="col col__spaneight">
+                  <div class="col__evenpad">
+                    <h5>Title</h5>
+                    <p>{{question.title}}</p>
+                  </div>
+                </div>
+
+                <div class="col col__spantwo">
+                  <div class="col__evenpad">
+                    <h5>Active</h5>
+                    <p>
+                        <span *ngIf="question.active === true" class="true">true</span>
+                        <span *ngIf="question.active === false" class="false">false</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col col__spantwo">
+                  <div class="col__evenpad">
+                    <div class="assessments__buttons">
+                      <a href="JavaScript:void(0);" (click)="editQuestion(question)" class="btn btn__details">Edit</a>
+                      <a href="JavaScript:void(0);" (click)="deleteQuestion(i)" class="btn btn__standard delete"
+                        data-modaltype="question_answers_modal">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <div class="list__item" *ngIf="questionList.length === 0">
+          <div class="row">
+            <div class="col col__spantwelve">
+              <div class="col__evenpad">
+                <div class="list__info">
+                  <p>There are no questions to display</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!actionPending && !addQuestionActive" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Save Changes
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa"
+            [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending  && !addQuestionActive" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to section listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>

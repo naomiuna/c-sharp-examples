@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col col__spanthree" *ngIf="activeTab === 1">
+        <a href="JavaScript:void(0);" (click)='setActiveTab(2)' class="btn btn__add">Add a new Section</a>
+    </div>
+</div>
+<div class="row" *ngIf="displaySuccessMessage">
+    <div class="alert alert-account-success" *ngIf="displaySuccessMessage">
+        <strong>Success!</strong> {{successMessage}}
+    </div>
+</div>
+<div class="row">
+    <div class="col col__spantwelve">
+        <div class="col__evenpad">
+            <div *ngIf="activeTab === 1">
+                <app-assessments-section-edit-list [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit-list>
+            </div>
+            <div *ngIf="activeTab === 2">
+                <app-assessments-section-add-form [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-add-form>
+            </div>
+            <div *ngIf="activeTab === 3">
+                <app-assessments-section-edit [id]="editKey" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit>
+            </div>
+        </div>
+    </div>
+</div>

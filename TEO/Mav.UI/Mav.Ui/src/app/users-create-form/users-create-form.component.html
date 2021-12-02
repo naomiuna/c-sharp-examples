@@ -1,0 +1,70 @@
+<form [formGroup]="createUserForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> User details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">First Name<em>*</em></label>
+              <input type="text" class="primary" name="FirstName" id="FirstName" placeholder="Please enter a first name"
+                [formControl]="createUserForm.controls['FirstName']" />
+              <validation-message fieldName="FirstName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Surname<em>*</em></label>
+              <input type="text" class="primary" name="Surname" id="Surname" placeholder="Please enter a surname"
+                [formControl]="createUserForm.controls['Surname']" />
+              <validation-message fieldName="Surname"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Email Address<em>*</em></label>
+              <input type="email" class="primary" name="Email" id="Email" placeholder="Please enter an email address"
+                [formControl]="createUserForm.controls['Email']" />
+              <validation-message fieldName="Email"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Role<em>*</em></label>
+              <mat-select placeholder="System role type" name="Role" id="Role" [formControl]="createUserForm.controls['Role']">
+                <mat-option [value]="1">Administrator</mat-option>
+                <mat-option [value]="2">Editor</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!updateOk && !actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit" >
+          Add user
+        </button>
+      </div>
+      <div *ngIf="updateOk && !actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__action" type="submit" (click)="addAnother()" >
+          Add another user
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>

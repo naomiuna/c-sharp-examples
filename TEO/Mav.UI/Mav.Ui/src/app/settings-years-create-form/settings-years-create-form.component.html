@@ -1,0 +1,47 @@
+<form [formGroup]="createYearForm" (ngSubmit)="saveChanges()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Academic year details have been successfully created.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Year<em>*</em></label>
+              <input type="number" class="primary" name="Year" id="Year" placeholder="Please enter a year value (e.g. 2018)"
+                [formControl]="createYearForm.controls['Year']" maxlength="4" />
+              <validation-message fieldName="Year"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Display<em>*</em></label>
+              <input type="text" class="primary" name="Display" id="Display" placeholder="Please enter a display name (e.g. 2018/19)"
+                [formControl]="createYearForm.controls['Display']" maxlength="10" />
+              <validation-message fieldName="Display"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

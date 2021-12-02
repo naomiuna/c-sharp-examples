@@ -1,0 +1,76 @@
+<form [formGroup]="editOrganisationTypeForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Organisation type details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Name<em>*</em></label>
+              <input type="text" class="primary" name="Name" id="Name" placeholder="Please enter a name for the organisation type"
+                [formControl]="editOrganisationTypeForm.controls['Name']" maxlength="50" />
+              <validation-message fieldName="Name"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Centre Limit<em>*</em></label>
+              <input type="number" class="primary" name="CentreLimit" id="CentreLimit" placeholder="The maximum number of allowable centres per organisation type"
+                [formControl]="editOrganisationTypeForm.controls['CentreLimit']" maxlength="6" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending"class="formrow fill cf">
+          <button class="btn btn__standard delete trigger__modal" data-modaltype="del_centretype_modal">
+              Delete Organisation Type
+          </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Settings
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="addAnother()" >
+          Add Another Organisation Type
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<section id="myModal" class="modal" data-modaltype="del_centretype_modal">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Delete Organisation Type</h2>
+        <p>Are you sure you want to delete this organisation type?</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDelete()' class="btn btn__standard delete cancel">Delete Organisation Type</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a href="#" class="btn btn__standard cancel">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

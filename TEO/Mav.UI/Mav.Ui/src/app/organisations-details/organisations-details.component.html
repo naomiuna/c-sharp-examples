@@ -1,0 +1,201 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/licence-management")'>Licence Management</a>
+            </li>
+            <li>
+              <span>Organisation Details</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessment Section Report" />
+          <h5>Licence User Management</h5>
+
+          <div class="alert alert-account-success" *ngIf="enabled">
+            <strong>Success!</strong> This account and licence are now enabled. Login details have been sent to the main contact email.
+          </div>
+          <div class="alert alert-account-success" *ngIf="disabled">
+            <strong>Success!</strong> This account and licence are now disabled.
+          </div>
+
+        </div>
+        <h4>Organisation Details</h4>
+        <div class="listing">
+          
+          <div class="list__item">
+            <div class="row">
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <h5>Organisation Name</h5>
+                    <p>{{orgModel.organisationName}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <h5>Organisation Type</h5>
+                    <p>{{orgType}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <h5>Address</h5>
+                    <p>{{orgModel.addressLine1}}</p>
+                    <p>{{orgModel.addressLine2}}</p>
+                    <p>{{orgModel.addressLine3}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <h5>Main Contact</h5>
+                    <p>{{orgModel.mainContactName}}</p>
+                    <p>{{orgModel.mainContactEmail}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <h5>Lead Financial Contact</h5>
+                    <p>{{orgModel.leadFinancialName}}</p>
+                    <p>{{orgModel.leadFinancialEmail}}</p>
+                    <p>{{orgModel.leadFinancialNumber}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col col__spantwo">
+                <div class="col__evenpad">
+                  <div class="list__info">
+                    <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">Edit Organisation</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+      <div class="content__contain">
+        <div class="divider__block">
+          <div class="page__header">
+            <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+            <h5>Licence</h5>
+          </div>
+
+          <div class="listing">
+
+            <div class="list__item" *ngIf="licence === false">
+              <div class="row">
+                <div class="col col__spanthree">
+                  <div class="col__evenpad">
+                    <div class="list__info">
+                      <p>This organisation has no licence</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col col__spanthree col__offbysix">
+                  <div class="col__evenpad">
+                    <div class="list__info">
+                      <a href="JavaScript:void(0);" (click)='addLicence()' class="btn btn__details">Add Licence</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="licence === true">
+              <div class="list__item">
+                <div class="row">
+                  <div class="col col__spantwo">
+                    <div class="col__evenpad">
+                      <div class="list__info">
+                        <h5>Max Centres</h5>
+                        <p>{{orgModel.licence.maxCentres}}</p>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col col__spantwo">
+                    <div class="col__evenpad">
+                      <div class="list__info">
+                        <h5>Cost</h5>
+                        <p>{{cost}}</p>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col col__spantwo">
+                    <div class="col__evenpad">
+                      <div class="list__info">
+                        <h5>Academic Year</h5>
+                        <p>{{orgModel.licence.academicYear}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col col__spantwo">
+                    <div class="col__evenpad">
+                      <div class="list__info">
+                        <h5>Paid</h5>
+                        <span *ngIf="orgModel.licence.paid === true" class="true">Paid</span>
+                        <span *ngIf="orgModel.licence.paid === false" class="false">Not Paid</span>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col col__spanthree col__offbyone">
+                    <div class="col__evenpad">
+                      <div class="list__info">
+                        <a href="JavaScript:void(0);" (click)='editLicence()' class="btn btn__details">Edit Licence</a>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+              </div>
+
+              <div class="col col__spanthree col__offbytwo">
+                <a href="JavaScript:void(0);" (click)='enableAccount()' class="btn btn__details">Enable Account</a>
+                <div class="spinner small" *ngIf="actionPending"></div>
+              </div>
+              <div class="col col__spanthree col__offbytwo">
+                <a href="JavaScript:void(0);" (click)='disableAccount()' class="btn btn__details">Disable Account</a>
+                <div class="spinner small" *ngIf="actionPending"></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>

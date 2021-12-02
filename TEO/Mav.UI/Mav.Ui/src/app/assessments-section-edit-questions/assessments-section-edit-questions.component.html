@@ -1,0 +1,335 @@
+<div *ngIf="questionListingActive" class="row">
+  <div class="col col__spanthree">
+    <a href="JavaScript:void(0);" (click)='addQuestion()' class="btn btn__add">Add a new Question</a>
+  </div>
+</div>
+
+<form *ngIf="questionCrudActive" [formGroup]="addEditQuestionForm" (ngSubmit)="submitForm()" class="fill__form no__margin__bottom" novalidate #mainForm>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Question Number<em>*</em></label>
+              <input type="number" class="primary" name="Number" id="Number" placeholder="Please specify a question number"
+                [formControl]="addEditQuestionForm.controls['Number']" />
+              <validation-message fieldName="Number"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Question Title<em>*</em></label>
+              <input type="text" class="primary" name="Title" id="Title" placeholder="Please enter a question title"
+                [formControl]="addEditQuestionForm.controls['Title']" />
+              <validation-message fieldName="Title"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Hint Text</label>
+              <input type="text" class="primary" name="HintText" id="HintText" placeholder="Please enter a question hint text"
+                [formControl]="addEditQuestionForm.controls['HintText']" />
+            </div>
+          </div>
+        </div>
+        <div class="col col__spansix" *ngIf="crudFormTypeId === 2">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Active?</label>
+              <mat-slide-toggle (change)="changeQuestionActive($event)" class="example-margin" [checked]="questionActive">
+                Active?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Category / Grouping</label>
+              <mat-select placeholder="Please select a category group (optional)" name="GroupID" id="GroupID" [formControl]="addEditQuestionForm.controls['GroupID']">
+                <mat-option [value]="">Unassigned</mat-option>
+                <mat-option *ngFor="let group of questionGroupList" [value]="group.id">
+                  {{ group.title }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Multiple Choice? (default is Yes/No question type)<em>*</em></label>
+              <mat-slide-toggle (change)="changeIsMultiChoice($event)" class="example-margin" [checked]="isMultiChoice">
+                Multiple Choice?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isMultiChoice" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Correct Answer<em>*</em></label>
+              <mat-select placeholder="Please select the correct answer"
+                  name="YesNoCorrectID" id="YesNoCorrectID" [formControl]="addEditQuestionForm.controls['YesNoCorrectID']">
+                  <mat-option [value]="0">NO</mat-option>
+                  <mat-option [value]="1">YES</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isMultiChoice" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">No. of Correct Selections</label>
+              <input type="number" class="primary" name="Selections" id="Selections" placeholder="For multiple choice questions, please state no. of correct answers"
+                [formControl]="addEditQuestionForm.controls['Selections']" />
+              <validation-message fieldName="Selections"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isMultiChoice" class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Answer Choices<em>*</em></label>
+
+              <div class="row">
+                <div class="col col__spanfour col__offbyeight">
+                  <a href="JavaScript:void(0);" (click)='addAnswer()' class="btn btn__add btn_sub_small trigger__modal"
+                  data-modaltype="question_answers_modal">Add Answer</a>
+                </div>
+              </div>
+
+              <div class="listing">
+
+                <div *ngFor="let answer of answerList; let idx = index; trackBy: trackByAnswerIdx">
+                  <div *ngIf="!answer.deleted" class="list__item assessment">
+                    <div class="row">
+                      <div class="col col__spansix">
+                        <div class="col__evenpad">
+                          <h5>Title (
+                              <span *ngIf="answer.active === true" class="true">active</span>
+                              <span *ngIf="answer.active === false" class="false">inactive</span>
+                            )</h5>
+                          <p>{{answer.orderID}}: {{answer.title}}</p>
+                        </div>
+                      </div>
+                      <div class="col col__spanthree">
+                        <div class="col__evenpad">
+                          <h5>Correct?</h5>
+                          <p>
+                              <span *ngIf="answer.isCorrect === true" class="true">true</span>
+                              <span *ngIf="answer.isCorrect === false" class="false">false</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col col__spanthree">
+                        <div class="col__evenpad">
+                          <div class="assessments__buttons">
+                            <a href="JavaScript:void(0);" (click)="editAnswer(idx)" class="btn btn__details btn_sub_small trigger__modal"
+                            data-modaltype="question_answers_modal">Edit</a>
+                            <a href="JavaScript:void(0);" (click)="deleteAnswer(idx)" class="btn btn__standard btn_sub_small delete">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="list__item" *ngIf="answerList.length === 0">
+                  <div class="row">
+                    <div class="col col__spantwelve">
+                      <div class="col__evenpad">
+                        <div class="list__info">
+                          <p>There are currently no answers to display.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          <span *ngIf="crudFormTypeId === 1">Add Question</span>
+          <span *ngIf="crudFormTypeId === 2">Update Question</span>
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}"
+            aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelAddEditForm()">
+          Cancel
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="questionListingActive" class="listing">
+
+  <div *ngFor="let question of questionList" class="list__item assessment">
+    <div class="row">
+      <div class="col col__spanfour">
+        <div class="col__evenpad">
+          <h5>Question No. / Title</h5>
+          <p>{{question.number}}: {{question.title}}</p>
+        </div>
+      </div>
+      <div class="col col__spantwo">
+        <div class="col__evenpad">
+          <h5>Question Type</h5>
+          <p>{{question.typeName}}</p>
+        </div>
+      </div>
+      <div class="col col__spanthree">
+        <div class="col__evenpad">
+          <h5>Category / Grouping</h5>
+          <p>{{!!question.groupName ? question.groupName : 'N/A'}}</p>
+        </div>
+      </div>
+      <div class="col col__spanone">
+        <div class="col__evenpad">
+          <h5>Active</h5>
+          <p>
+              <span *ngIf="question.active === true" class="true">true</span>
+              <span *ngIf="question.active === false" class="false">false</span>
+          </p>
+        </div>
+      </div>
+      <div class="col col__spantwo">
+        <div class="col__evenpad">
+          <div class="assessments__buttons">
+            <a href="JavaScript:void(0);" (click)="editQuestion(question.id)" class="btn btn__details">Edit Details</a>
+            <a href="JavaScript:void(0);" (click)="deleteQuestion(question.id)" class="btn btn__standard delete trigger__modal"
+              data-modaltype="question_answers_modal">Delete Question</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="list__item" *ngIf="questionList.length === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!actionPending" class="row">
+  <div class="col col__spansix">
+    <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+      Back to section listing
+    </button>
+  </div>
+</div>
+
+<section id="myModal" class="modal" data-modaltype="question_answers_modal">
+  <div id="modal__content">
+    <span class="closeModal">&times;</span>
+    <div *ngIf="questionListingActive">
+      <h2>Delete Question</h2>
+      <p>Are you sure you want to delete this question?</p>
+      <div class="row buttons">
+        <div class="col col__spansix">
+          <div class="col__evenpad">
+            <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDeleteQuestion()' class="btn btn__standard delete">Delete Question</a>
+            <div class="spinner small" *ngIf="actionPending"></div>
+          </div>
+        </div>
+        <div class="col col__spansix">
+          <div class="col__evenpad">
+            <a href="#" class="btn btn__standard cancel">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="questionCrudActive">
+      <h2>Answer Options</h2>
+      <form [formGroup]="addEditAnswerForm" (ngSubmit)="submitAnswerForm()" class="fill__form" novalidate #mainForm>
+        <div class="row">
+          <div class="col col__spantwelve">
+            <div class="row row__negative20">
+              <div class="col col__spantwelve">
+                <div class="col__evenpad">
+                  <div class="formrow fill cf">
+                    <label>Answer Order<em>*</em></label>
+                    <input type="number" name="OrderID" id="OrderID"
+                      [formControl]="addEditAnswerForm.controls['OrderID']" />
+                    <validation-message fieldName="OrderID"></validation-message>
+                  </div>
+                </div>
+              </div>
+              <div class="col col__spantwelve">
+                <div class="col__evenpad">
+                  <div class="formrow fill cf">
+                    <label>Answer Title<em>*</em></label>
+                    <input type="text" name="Title" id="Title"
+                      [formControl]="addEditAnswerForm.controls['Title']" />
+                    <validation-message fieldName="Title"></validation-message>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row__negative20">
+              <div class="col col__spansix">
+                <div class="col__evenpad">
+                  <div class="formrow fill cf">
+                    <mat-slide-toggle (change)="changeAnswerIsCorrect($event)" class="example-margin" [checked]="answerIsCorrect">
+                      Correct Answer?
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+              </div>
+              <div class="col col__spansix">
+                <div class="col__evenpad">
+                  <div class="formrow fill cf">
+                    <mat-slide-toggle (change)="changeAnswerActive($event)" class="example-margin" [checked]="answerActive">
+                      Active?
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row buttons">
+          <div class="col col__spansix">
+            <div class="col__evenpad" *ngIf="!actionPending">
+              <a href="#" class="btn btn__standard btn__grey cancel">Cancel</a>
+            </div>
+          </div>
+          <div class="col col__spansix">
+            <div class="col__evenpad">
+              <button *ngIf="!actionPending" class="btn btn__standard" type="submit">
+                <span *ngIf="crudAnswerFormTypeId === 1">Add Answer</span>
+                <span *ngIf="crudAnswerFormTypeId === 2">Update Answer</span>
+              </button>
+              <div class="spinner small" *ngIf="actionPending"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

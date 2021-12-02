@@ -1,0 +1,3 @@
+<app-invigilators *ngIf="isUserExamOfficer()"></app-invigilators>
+<app-user-assessments *ngIf="isUserExamInvigilator() || isUserSLT()"></app-user-assessments>
+<app-admin-dashboard *ngIf="isUserAdministrator() || isUserEditor()"></app-admin-dashboard>

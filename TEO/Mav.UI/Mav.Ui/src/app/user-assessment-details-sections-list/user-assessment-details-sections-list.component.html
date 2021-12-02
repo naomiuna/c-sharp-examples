@@ -1,0 +1,14 @@
+<p class="bold" *ngIf="searchModel.items.length > 1">Assessment Sections:</p>
+<app-user-assessment-details-sections-list-item *ngFor="let section of searchModel.items" [section]="section" [userAssessmentID]="id" [count]="searchModel.items.length"></app-user-assessment-details-sections-list-item>
+
+<div class="list__item assessment" *ngIf="searchModel.count === 0">
+  <div class="row">
+    <div class="col col__spantwelve">
+      <div class="col__evenpad">
+        <div class="details">
+          <p>{{loadingText}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

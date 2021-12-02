@@ -1,0 +1,76 @@
+<div class="list__item assessment">
+  <div class="row">
+    <div class="col col__spantwelve">
+      <div class="col__evenpad">
+        <h5 *ngIf="count > 1">Section {{section.number}}</h5>
+        <h5 *ngIf="count === 1">{{section.title}}</h5>
+      </div>
+    </div>
+    <div *ngIf="section.actionAllowed && section.totalScore === section.totalQuestions && section.totalQuestions > 0 && section.Attempts < section.maxAttempts" class="col col__spantwelve">
+      <div class="col__evenpad">
+        <p class="maximum">Can't retake questions as maximum score gained.</p>
+      </div>
+    </div>
+    <div *ngIf="section.isEoQualification && section.statusID === 4">
+      <div class="col__evenpad">
+        <p class="maximum">Maximum number of allowed attempts has been exceeded, your most recent attempt has been saved.</p>
+      </div>
+    </div>
+    <div *ngIf="section.totalQuestions === 0">
+      <div class="col__evenpad">
+        <p class="maximum">This section currently has zero questions to take.</p>
+      </div>
+    </div>
+    <div *ngIf="section.statusID === 5">
+      <div class="col__evenpad">
+        <p class="maximum">You have run out of time for completing this section, your most recent attempt has been saved.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="col__evenpad">
+        <div class="details">
+          <p *ngIf="count > 1">{{section.title}}</p>
+          <p><span class="bold">Status: </span><span>{{section.statusID | assessmentsectionstatus}}</span></p>
+          <p *ngIf="section.isEoQualification" class="no__margin"><span class="bold">Max Time Allowed: </span><span>{{timeRemaining}}</span></p>
+          <p *ngIf="section.isEoQualification && section.maxAttempts > 0" class="no__margin"><span class="bold">Attempts: </span><span>{{section.attempts}}/{{section.maxAttempts}}</span></p>
+          <p *ngIf="section.isEoQualification && section.maxAttempts === 0" class="no__margin"><span class="bold">Attempts: </span><span>Unlimited</span></p>
+          <p class="no__margin bold">Score: {{section.totalScore}}/{{section.totalQuestions}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spansix">
+      <div *ngIf="!actionPending" class="col__evenpad">
+        <div *ngIf="section.actionAllowed && section.statusID === 0 && section.totalQuestions > 0" class="assessments__buttons">
+          <a href="JavaScript:void(0);" (click)='startSection()' class="btn btn__details start">Start Questions</a>
+          <a href="JavaScript:void(0);" class="btn btn__details disable">View Summary</a>
+        </div>
+        <div *ngIf="section.actionAllowed && section.statusID === 1 && section.totalQuestions > 0" class="assessments__buttons">
+          <a href="JavaScript:void(0);" (click)='restartSection()' class="btn btn__details start">Restart</a>
+          <a href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+        <div *ngIf="section.actionAllowed && section.statusID === 2" class="assessments__buttons">
+          <a href="JavaScript:void(0);" (click)='restartSection()' class="btn btn__details">Restart</a>
+          <a href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+        <div *ngIf="section.actionAllowed && section.statusID === 3" class="assessments__buttons">
+          <a href="JavaScript:void(0);" class="btn btn__details disable">Restart</a>
+          <a href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+        <div *ngIf="section.actionAllowed && section.isEoQualification && section.statusID === 4" class="assessments__buttons">
+          <a href="JavaScript:void(0);" class="btn btn__details disable">Restart</a>
+          <a href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+        <div *ngIf="section.actionAllowed && section.isEoQualification && section.statusID === 5" class="assessments__buttons">
+          <a href="JavaScript:void(0);" class="btn btn__details disable">Restart</a>
+          <a href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+        <div *ngIf="!section.actionAllowed" class="assessments__buttons">
+          <a *ngIf="section.statusID === 0" href="JavaScript:void(0);" class="btn btn__details disable">View Summary</a>
+          <a *ngIf="section.statusID > 0 && section.statusID <= 5" href="JavaScript:void(0);" (click)='viewSectionSummary()' class="btn btn__details">View Summary</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

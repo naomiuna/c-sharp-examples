@@ -1,0 +1,114 @@
+﻿
+.alert {
+    position: relative;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-heading {
+    color: inherit;
+}
+
+.alert-success {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.alert-info {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.alert-warning {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.alert-danger {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.alert-account-success {
+    color: #28a745;
+    background-color: #d8f6df;
+}
+
+.alert a {
+    color: #f04e23;
+    font-weight: 600;
+}
+
+.alert a:hover, .alert a:active {
+    color: #003c7f;
+    font-weight: 600;
+}
+
+.alert-account-info {
+    color: #17a2b8;
+    background-color: #d4f5fa;
+}
+
+.alert-account-warning {
+    color: #ffc107;
+    background-color: #fff4d3;
+}
+
+.alert-account-danger {
+    color: #dc3545;
+    background-color: #fae3e5;
+}
+
+.alert ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.alert ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.validate-error-row {
+    display: none !important;
+}
+
+.validate-error-row.field-validation-error {
+    display: block !important;
+}
+
+.consent-description label, .list-group-item label, .consent-remember label {
+    color: #333;
+    font-size: 14px;
+    display: inline-block;
+    width: inherit;
+}
+
+.list-group-item input, .list-group-item input[type="checkbox"],
+.consent-remember input, .consent-remember input[type="checkbox"] {
+    display: inline-block;
+    height: 13px;
+    width: 13px;
+    position: static;
+    top: auto;
+    right: auto;
+    transform: none;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+    color: #FFF;
+}
+
+.btn__question {
+    border: 0 !important;
+    margin-top: 10px !important;
+    padding: 1em 1.666666666666667em !important;
+}
+
+.terms__hidden {
+    display: none;
+}

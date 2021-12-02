@@ -1,0 +1,106 @@
+<form [formGroup]="editSectionForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Section details have been successfully saved.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <input type="hidden" id="hdnApiBaseUrl" value="{{apiBaseUrl}}" />
+  <input type="hidden" id="hdnAuthorityUrl" value="{{authorityUrl}}" />
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Section Number<em>*</em></label>
+              <input type="number" class="primary" name="Number" id="Number" placeholder="Please enter a section number"
+                [formControl]="editSectionForm.controls['Number']" />
+              <validation-message fieldName="Number"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Section Title<em>*</em></label>
+              <input type="text" class="primary" name="Title" id="Title" placeholder="Please enter a section title"
+                [formControl]="editSectionForm.controls['Title']" />
+              <validation-message fieldName="Title"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Booklet Reference<em>*</em></label>
+              <input type="text" class="primary" name="Reference" id="Reference" placeholder="Please enter a booklet reference"
+                [formControl]="editSectionForm.controls['Reference']" />
+              <validation-message fieldName="Reference"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Set Questions Randomly?<em>*</em></label>
+              <mat-slide-toggle (change)="changeIsRandom($event)" class="example-margin" [checked]="isRandom">
+                Random?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isRandom" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Random Quantity</label>
+              <input type="number" class="primary" name="Quantity" id="Quantity" placeholder="For random questions, please state quantity to set"
+                [formControl]="editSectionForm.controls['Quantity']" />
+              <validation-message fieldName="Quantity"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Max Attempts</label>
+              <input type="number" class="primary" name="MaxAttempts" id="MaxAttempts" placeholder="Please state the max number of attempts for this section."
+                [formControl]="editSectionForm.controls['MaxAttempts']" />
+              <validation-message fieldName="MaxAttempts"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Time Limit (Minutes)</label>
+              <input type="number" class="primary" name="TimeLimit" id="TimeLimit" placeholder="Please state the max allowed time for this section."
+                [formControl]="editSectionForm.controls['TimeLimit']" />
+              <validation-message fieldName="TimeLimit"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Section Information<em>*</em></label>
+              <angular-tinymce [formControl]="editSectionForm.controls['Information']" [settings]="customEditorSettings"></angular-tinymce>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Save Changes
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}"
+            aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to section listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>

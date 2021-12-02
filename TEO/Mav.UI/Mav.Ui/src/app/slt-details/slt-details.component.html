@@ -1,0 +1,44 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+      <div class="row">
+          <div class="col col__spantwelve">
+              <div class="col__evenpad">
+                  <ul class="inline__list">
+                      <li>
+                          <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+                      </li>
+                      <li>
+                          <a href="JavaScript:void(0);" (click)='goToComponent("slts")'>List of SLT/Line Manager Users</a>
+                      </li>
+                      <li>
+                          <span>SLT/Line Manager Details</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  <main>
+      <div class="content__contain">
+          <div class="divider__block">
+              <div class="page__header">
+                <img src="/assets/images/icons/users.svg" alt="slts" />
+                <h5>SLT/Line Manager Details</h5>
+              </div>
+              <div class="row">
+                <div class="col col__spansix">
+                  <app-invigilator-details-basic [id]="id"></app-invigilator-details-basic>
+                </div>
+                <div class="col col__spansix">
+                  <app-invigilator-details-assessment [id]="id"></app-invigilator-details-assessment>
+                </div>
+              </div>
+              <div class="row divider__block">
+                <div class="col col__spantwelve">
+                  <app-invigilator-details-assessment-history [id]="id"></app-invigilator-details-assessment-history>
+                </div>
+              </div>
+          </div>
+      </div>
+  </main>
+</div>

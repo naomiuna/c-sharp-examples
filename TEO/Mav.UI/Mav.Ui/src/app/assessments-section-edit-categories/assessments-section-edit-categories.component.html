@@ -1,0 +1,115 @@
+<div *ngIf="categoryListingActive" class="row">
+  <div class="col col__spanthree">
+    <a href="JavaScript:void(0);" (click)='addQuestionGroup()' class="btn btn__add">Add a new Category</a>
+  </div>
+</div>
+
+<form *ngIf="categoryCrudActive" [formGroup]="addEditQuestionGroupForm" (ngSubmit)="submitForm()" class="fill__form no__margin__bottom" novalidate #mainForm>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Order ID<em>*</em></label>
+              <input type="number" class="primary" name="OrderId" id="OrderId" placeholder="Please specify category order"
+                [formControl]="addEditQuestionGroupForm.controls['OrderId']" />
+              <validation-message fieldName="OrderId"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Title<em>*</em></label>
+              <input type="text" class="primary" name="Title" id="Title" placeholder="Please enter a category title"
+                [formControl]="addEditQuestionGroupForm.controls['Title']" />
+              <validation-message fieldName="Title"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          <span *ngIf="crudFormTypeId === 1">Add Category</span>
+          <span *ngIf="crudFormTypeId === 2">Update Category</span>
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}"
+            aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelAddEditForm()">
+          Cancel
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="categoryListingActive" class="listing">
+
+  <div *ngFor="let group of questionGroupList" class="list__item assessment">
+    <div class="row">
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <h5>{{group.orderId}}: {{group.title}}</h5>
+        </div>
+      </div>
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <div class="assessments__buttons">
+            <a href="JavaScript:void(0);" (click)="editQuestionGroup(group.id)" class="btn btn__details">Edit Details</a>
+            <a href="JavaScript:void(0);" (click)="deleteQuestionGroup(group.id)" class="btn btn__standard delete trigger__modal"
+              data-modaltype="del_question_group_modal">Delete Category</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="list__item" *ngIf="questionGroupList.length === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!actionPending" class="row">
+  <div class="col col__spansix">
+    <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+      Back to section listing
+    </button>
+  </div>
+</div>
+
+<section id="myModal" class="modal" data-modaltype="del_question_group_modal">
+  <div id="modal__content">
+    <span class="closeModal">&times;</span>
+    <h2>Delete Category</h2>
+    <p>Are you sure you want to delete this category?</p>
+    <div class="row buttons">
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDeleteQuestionGroup()' class="btn btn__standard delete">Delete
+              Category</a>
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+      </div>
+      <div class="col col__spansix">
+        <div class="col__evenpad">
+          <a href="#" class="btn btn__standard cancel">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+@model LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@if (Model.EnableLocalLogin)
+{
+    <form asp-route="Login" class="fill__form margin__top">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <h4>Please Login</h4>
+        @Html.Partial("_ValidationSummary")
+        <div class="formrow fill cf">
+            <label>Email address<em>*</em></label>
+            <input class="alt" asp-for="Username" maxlength="200" autofocus />
+            <span asp-validation-for="Username" class="validate-error-row"></span>
+        </div>
+        <div class="formrow fill cf">
+            <label>Password<em>*</em></label>
+            <input type="password" class="alt" asp-for="Password" maxlength="30" autocomplete="off" />
+            <span asp-validation-for="Password" class="validate-error-row"></span>
+        </div>
+        <div class="formrow fill cf">
+            <div class="col col__spansix align__left">
+                <a asp-controller="Account" asp-action="ResendActivation" class="link">Resend activation email?</a>
+            </div>
+            <div class="col col__spansix align__right">
+                <a asp-controller="Account" asp-action="RequestPasswordReset" class="link">Forgot your password?</a>
+            </div>
+        </div>        
+        <button class="btn btn__standard margin__top" name="button" value="login">Login</button>
+    </form>
+}

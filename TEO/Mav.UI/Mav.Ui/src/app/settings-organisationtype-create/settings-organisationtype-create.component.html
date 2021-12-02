@@ -1,0 +1,32 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/settings")'>Settings</a>
+            </li>
+            <li>
+              <span>Create Organisation Type</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Create Organisation Type" />
+          <h5>Create Organisation Type</h5>
+        </div>
+        <app-settings-organisationtype-create-form></app-settings-organisationtype-create-form>
+      </div>
+    </div>
+  </main>
+</div>

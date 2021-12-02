@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Image Picker</title>
+  <link href="/tinymce/skins/lightgray/skin.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+ </head>
+ <body>
+	<div class="mce-container mce-panel mce-first mce-last mce-abs-layout-item" style="left: 0px; top: 0px; width: 100%; height: 100%;">
+		
+		<div class='mce-tabs'>
+			<div id="album_li_1" class="mce-tab mce-active">
+				<a href="#">Image Library</a>
+			</div>
+		</div>
+
+		<div class="mce-container-body mce-abs-layout scroll-area">
+			<div class="mce-abs-end"></div>
+			<ul class="cf">
+				<li class="titler imageItem">
+					<a href="#" class="imgContain">
+						<img src="/assets/images/pictures/login__image.png" alt="Image A" border="0" />
+					</a>
+					<a href="#">Image A</a>
+				</li>
+				<li class="titler imageItem">
+					<a href="#" class="imgContain">
+						<img src="/assets/images/pictures/login__image.png" alt="Image A" border="0" />
+					</a>
+					<a href="#">Image A</a>
+				</li>
+				<li class="titler imageItem">
+					<a href="#" class="imgContain">
+						<img src="/assets/images/pictures/login__image.png" alt="Image A" border="0" />
+					</a>
+					<a href="#">Image A</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+        function closeit(value, alt) {
+            var args = top.tinymce.activeEditor.windowManager.getParams();
+            var win = args.win;
+            var field_name = args.field_name;
+            win.document.getElementById(field_name).value = value;
+            if (alt.length > 0) {
+                win.document.getElementById("mce_48").value = alt;
+            }
+            top.tinymce.activeEditor.windowManager.close();
+        }
+    </script>
+    <style>
+        .scroll-area {
+            overflow: hidden;
+            overflow-y: scroll;
+            height: 560px;
+        }
+        .scroll-area * {
+            white-space: pre;
+            white-space: pre-wrap;
+            white-space: pre-line;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -hp-pre-wrap;
+            word-wrap: break-word;
+        }
+        .mce-container *, .mce-container *:before, .mce-container *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .imageItem {
+            list-style: none;   
+        }
+    </style>
+ </body>
+</html>

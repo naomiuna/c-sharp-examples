@@ -1,0 +1,27 @@
+<div class="listing">
+    <div class="list__item">
+        <p *ngIf="latestAssessment === null">No assessment history available...</p>
+        <p *ngIf="!!latestAssessment" class="bold">
+            <span>{{latestAssessment.title}} - {{latestAssessment.statusID | assessmentstatus}}</span>
+            <span *ngIf="!!latestAssessment.submittedOn"> ({{latestAssessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+        </p>
+        <div class="table__wrapper">
+            <table *ngIf="!!latestAssessment">
+                <tr *ngFor="let section of searchModel.items">
+                    <td width="25%">Section {{section.number}}</td>
+                    <td width="25%">Status: {{section.statusID | assessmentsectionstatus}}</td>
+                    <td width="25%">Attempts: {{section.attempts}}</td>
+                    <td width="25%">Score: {{section.totalScore}} / {{section.totalQuestions}}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <p class="bold tertiary no__margin">Total Score {{totalScore}} / {{totalQuestions}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

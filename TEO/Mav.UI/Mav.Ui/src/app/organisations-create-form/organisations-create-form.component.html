@@ -1,0 +1,129 @@
+<form [formGroup]="addOrgForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Organisation Name<em>*</em></label>
+              <input type="text" class="primary" name="OrganisationName" id="OrganisationName" placeholder="Please enter an organisation name"
+                [formControl]="addOrgForm.controls['OrganisationName']" />
+              <validation-message fieldName="OrganisationName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spansix">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Organisation Type<em>*</em></label>
+              <mat-select placeholder="Organisation Type" (selectionChange)="updateCentreLimit()"
+                  name="TypeID" id="TypeID" [formControl]="addOrgForm.controls['TypeID']">
+                    <mat-option *ngFor="let item of orgTypes" [value]="item.id">
+                    {{ item.name }}
+                    </mat-option>
+              </mat-select>
+              <validation-message fieldName="TypeID"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spansix">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Centre Limit<em>*</em> (default centre limit is defined for organisation type)</label>
+              <input type="number" class="primary" name="CentreLimit" id="CentreLimit" placeholder="Please specify a centre limit"
+                [formControl]="addOrgForm.controls['CentreLimit']" />
+              <validation-message fieldName="CentreLimit"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Address Line 1<em>*</em></label>
+              <input type="text" class="primary" name="AddressLine1" id="AddressLine1" placeholder="Please enter an address"
+              [formControl]="addOrgForm.controls['AddressLine1']" />
+              <validation-message fieldName="AddressLine1"></validation-message>
+              <input type="text" class="primary" name="AddressLine2" id="AddressLine2" placeholder="Please enter an address"
+              [formControl]="addOrgForm.controls['AddressLine2']" />
+              <validation-message fieldName="AddressLine2"></validation-message>
+              <input type="text" class="primary" name="AddressLine3" id="AddressLine3" placeholder="Please enter an address"
+              [formControl]="addOrgForm.controls['AddressLine3']" />
+              <validation-message fieldName="AddressLine3"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Main Contact Name<em>*</em></label>
+              <input type="text" class="primary" name="MainContactName" id="MainContactName" placeholder="Please enter an main contact name"
+                [formControl]="addOrgForm.controls['MainContactName']" />
+              <validation-message fieldName="MainContactName"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Main Contact Email<em>*</em></label>
+              <input type="text" class="primary" name="MainContactEmail" id="MainContactEmail" placeholder="Please enter a main contact email"
+                [formControl]="addOrgForm.controls['MainContactEmail']" />
+              <validation-message fieldName="MainContactEmail"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Lead Financial Name<em>*</em></label>
+              <input type="text" class="primary" name="LeadFinancialName" id="LeadFinancialName" placeholder="Please enter a lead financial name"
+                [formControl]="addOrgForm.controls['LeadFinancialName']" />
+              <validation-message fieldName="LeadFinancialName"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Lead Financial Email<em>*</em></label>
+              <input type="text" class="primary" name="LeadFinancialEmail" id="LeadFinancialEmail" placeholder="Please enter a lead financial email"
+                [formControl]="addOrgForm.controls['LeadFinancialEmail']" />
+              <validation-message fieldName="LeadFinancialEmail"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Lead Financial Telephone Number<em>*</em></label>
+              <input type="text" class="primary" name="LeadFinancialNumber" id="LeadFinancialNumber" placeholder="Please enter a lead financial number"
+                [formControl]="addOrgForm.controls['LeadFinancialNumber']" />
+              <validation-message fieldName="LeadFinancialNumber"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!updateOk && !actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Add Organisation
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>

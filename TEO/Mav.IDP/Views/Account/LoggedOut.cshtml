@@ -1,0 +1,35 @@
+﻿@model LoggedOutViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    ViewData["signed-out"] = true;
+}
+
+<div class="page__header">
+    <img src="~/images/icons/users.svg" alt="Account" />
+    <h5>Logout</h5>
+</div>
+<p>You are now logged out</p>
+
+<div class="page-header logged-out">
+    @if (Model.PostLogoutRedirectUri != null)
+    {
+        <div>
+            Click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">here</a> to return to the
+            <span>@Model.ClientName</span> application.
+        </div>
+    }
+
+    @if (Model.SignOutIframeUrl != null)
+    {
+        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+    }
+</div>
+
+@section scripts
+    {
+    @if (Model.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}

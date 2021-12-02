@@ -1,0 +1,91 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToAssessmentDetails()'>Assessment Details</a>
+            </li>
+            <li>
+              <span>Confirmation Statement</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain" id="statement__frame">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessments" class="no__print" />
+          <h5 *ngIf="sectionDetails"><span *ngIf="sectionDetails.sectionCount > 1">Section {{sectionDetails.number}} - </span>{{sectionDetails.title}}</h5>
+        </div>
+        <div class="row divider__block__small">
+          <div class="col col__spantwelve">
+            <div class="col__evenpad">
+              <div class="height__check">
+                <h4 class="bold">Confirmation Statement</h4>
+                <div *ngIf="statement" [innerHTML]="statement.content | safeHtml" class="tiny_page"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="statement && statement.answers">
+          <div class="row"  *ngFor="let answer of statement.answers">
+            <div class="col col__spanfour" >
+              <div class="col__evenpad">
+                  <div class="height__check">
+                {{answer.question.title}}
+                </div>
+            </div>    
+            </div>
+  
+            <div class="col col__spantwo" >
+                <div class="col__evenpad">
+                    <a href="JavaScript:void(0);" (click)='updateAnswer(answer.question.id, "no")' class="btn btn__question" [ngClass]="{'button__active': answer.answer == 'no'}">No</a>
+                  </div>
+            </div> 
+            
+            <div class="col col__spantwo" >
+              <div class="col__evenpad">
+                  <a href="JavaScript:void(0);" (click)='updateAnswer(answer.question.id, "yes")' class="btn btn__question" [ngClass]="{'button__active': answer.answer == 'yes'}" >Yes</a>
+                  <div *ngIf="isDirty && answer.answer != 'yes' && answer.answer != 'na'">
+                      <span class="validate__error__row"  style="position:relative">
+                        Please agree or select not applicable (N/A) before continuing.
+                      </span>
+                  </div>
+                </div>
+            </div>
+            
+            <div class="col col__spantwo">
+              <div class="col__evenpad">
+                <a href="JavaScript:void(0);" (click)='updateAnswer(answer.question.id, "na")' class="btn btn__question" [ngClass]="{'button__active': answer.answer == 'na'}">N/A</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div *ngIf="!!userAssessmentSection && userAssessmentSection.statusID < 3" class="row">
+          <div class="col col__spansix col__offbyfour">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToAssessmentQuestions()' class="btn btn__details">Next</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!!userAssessmentSection && userAssessmentSection.statusID < 3" class="row">
+          <div class="col col__spanfour col__offbyfive">
+            <div class="col__evenpad">
+              <a href="JavaScript:void()"  (click)="printStatement()" class="btn btn__question">Print</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

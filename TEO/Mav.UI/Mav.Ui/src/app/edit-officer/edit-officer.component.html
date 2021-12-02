@@ -1,0 +1,94 @@
+<form [formGroup]="editOfficerForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Officer details have been successfully saved.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">First Name<em>*</em></label>
+              <input type="text" class="primary" name="FirstName" id="FirstName" placeholder="Please enter a first name"
+                [formControl]="editOfficerForm.controls['FirstName']" />
+              <validation-message fieldName="FirstName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Surname<em>*</em></label>
+              <input type="text" class="primary" name="Surname" id="Surname" placeholder="Please enter a surname"
+                [formControl]="editOfficerForm.controls['Surname']" />
+              <validation-message fieldName="Surname"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Email Address<em>*</em></label>
+              <input type="email" class="primary" name="Email" id="Email" placeholder="Please enter an email address"
+                [formControl]="editOfficerForm.controls['Email']" />
+              <validation-message fieldName="Email"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Active<em>*</em></label>
+              <mat-slide-toggle
+                  (change)="changeEnabled($event)"
+                  class="example-margin"
+                  [checked]="isEnabled">
+                  Active?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Save Changes
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}"
+            aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard delete trigger__modal" data-modaltype="del_officer_modal">
+          Delete Officer
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to officer listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>
+<section id="myModal" class="modal" data-modaltype="del_officer_modal">
+  <div id="modal__content">
+      <span class="closeModal">&times;</span>
+      <h2>Delete Officer</h2>
+      <p>Are you sure you want to delete this exam officer?</p>
+      <div class="row buttons">
+          <div class="col col__spansix">
+              <div class="col__evenpad">
+                  <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDelete()' class="btn btn__standard delete">Delete Officer</a>
+                  <div class="spinner small" *ngIf="actionPending"></div>
+              </div>
+          </div>
+          <div class="col col__spansix">
+              <div class="col__evenpad">
+                  <a href="#" class="btn btn__standard cancel">Cancel</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

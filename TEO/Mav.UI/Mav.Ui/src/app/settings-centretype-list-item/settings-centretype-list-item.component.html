@@ -1,0 +1,38 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Code</h5>
+          <p>{{setting.code}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Name</h5>
+          <p>{{setting.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Invigilators</h5>
+          <p>
+            <span *ngIf="setting.maxInvigilators === null">(inherited)</span>
+            <span *ngIf="!!setting.maxInvigilators && setting.maxInvigilators > 0">{{setting.maxInvigilators}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">Edit Centre Type</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

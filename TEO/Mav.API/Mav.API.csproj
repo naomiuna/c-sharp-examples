@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190918014749_AddTablesSectionStatements1.cs" />
+    <Compile Remove="Migrations\20190918014749_AddTablesSectionStatements1.Designer.cs" />
+    <Compile Remove="Migrations\20190919051503_StatementTableUpdates.cs" />
+    <Compile Remove="Migrations\20190919051503_StatementTableUpdates.Designer.cs" />
+    <Compile Remove="Migrations\20190919234715_StatementTableUpdates.cs" />
+    <Compile Remove="Migrations\20190919234715_StatementTableUpdates.Designer.cs" />
+    <Compile Remove="Migrations\20190925005344_CenterTypeINvigilatorCap.cs" />
+    <Compile Remove="Migrations\20190925005344_CenterTypeINvigilatorCap.Designer.cs" />
+    <Compile Remove="Migrations\20200212121942_OrganisationTable.cs" />
+    <Compile Remove="Migrations\20200212121942_OrganisationTable.Designer.cs" />
+    <Compile Remove="Migrations\20200212123713_OrganisationTable.cs" />
+    <Compile Remove="Migrations\20200212123713_OrganisationTable.Designer.cs" />
+    <Compile Remove="Migrations\20200312085157_EditedOrgAndLicenceModel.cs" />
+    <Compile Remove="Migrations\20200312085157_EditedOrgAndLicenceModel.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mav.Common\Mav.Common.csproj" />
+    <ProjectReference Include="..\Mav.Data\Mav.Data.csproj" />
+    <ProjectReference Include="..\Mav.Models\Mav.Models.csproj" />
+    <ProjectReference Include="..\Mav.Services.Identity\Mav.Services.Identity.csproj" />
+    <ProjectReference Include="..\Mav.Services\Mav.Services.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

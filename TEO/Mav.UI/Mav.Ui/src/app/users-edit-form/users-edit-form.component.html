@@ -1,0 +1,96 @@
+<div class="page__header">
+  <img src="/assets/images/icons/assessments.svg" alt="Edit Admin User" />
+  <h5>Edit Admin User <span>{{firstName.value}} {{surname.value}}</span></h5>
+</div>
+<p>Please manage the user account details below:</p>
+<form [formGroup]="editUserForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> User details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">First Name<em>*</em></label>
+              <input type="text" class="primary" name="FirstName" id="FirstName" placeholder="Please enter a first name"
+                [formControl]="editUserForm.controls['FirstName']" />
+              <validation-message fieldName="FirstName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Surname<em>*</em></label>
+              <input type="text" class="primary" name="Surname" id="Surname" placeholder="Please enter a surname"
+                [formControl]="editUserForm.controls['Surname']" />
+              <validation-message fieldName="Surname"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Email Address<em>*</em></label>
+              <input type="email" class="primary" name="Email" id="Email" placeholder="Please enter an email address"
+                [formControl]="editUserForm.controls['Email']" />
+              <validation-message fieldName="Email"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Role<em>*</em></label>
+              <mat-select placeholder="System role type" name="Role" id="Role" [formControl]="editUserForm.controls['Role']">
+                  <mat-option [value]="1">Administrator</mat-option>
+                  <mat-option [value]="2">Editor</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Save Changes 
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard delete trigger__modal" data-modaltype="del_user_modal">
+          Delete User
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to User Listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>
+<section id="myModal" class="modal" data-modaltype="del_user_modal">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Delete User</h2>
+        <p>Are you sure you want to delete this user?</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDelete()' class="btn btn__standard delete cancel">Delete User</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a href="#" class="btn btn__standard cancel">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,122 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToDashboard()'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToInvigilators()'>List of Invigilator Users</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToInvigilatorDetails()'>Invigilator Details</a>
+            </li>
+            <li>
+              <span>Print Certificate</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block__small">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+          <h5>Print Certificate</h5>
+        </div>
+        <div class="listing divider__block__small">
+          <div id="certificate__frame">
+            <input type="hidden" id="hdnScreenID" value="{{screenID}}" />
+            <div *ngIf="screenID === 1" class="certificate align__center">
+              <div id="certificate">
+                  <div class="certificate__background">
+                    <img class="background" src="assets/images/certificate/certificate_background.png" />
+                    <div class="certificate__content">
+                      <h2 class="tertiary" style="padding-bottom: 20px;">Examinations Officer Certificate</h2>
+                      <div class="space">
+                        <p>This certificate confirms knowledge and understanding of JQC regulations for the 2020/21 academic year. This is required to qualify an individual to perform the role of examinations officer.</p>
+                      </div>
+                        <div class="space">
+                        <p>Awarded to:</p>
+                        <h2 class="tertiary">{{certificateModel.userName}}</h2>
+                        <h4>{{certificateModel.centreName}}</h4>
+                      </div>
+                      <div class="space">
+                        <h4>Result achieved: {{certificateModel.totalScore}}/{{certificateModel.maxScore}}</h4>
+                        <h4>Grade achieved: {{certificateModel.grade}}</h4>
+                      </div>
+                      <div class="space">
+                      <h4>Certificate Date: {{certificateModel.submittedOn | date :  "dd.MM.y"}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <img class="alt__logo" src="/assets/images/logos/main__logo__simple.png" alt="Logo" />
+              <h2 class="no__margin">{{certificateModel.userName}}</h2>
+              <h4 class="tertiary">{{certificateModel.centreName}}</h4>
+              <p class="alt">Has achieved the following score in the following area:</p>
+              <p class="bold no__margin">{{certificateModel.assessmentName}}</p>
+              <p class="alt">{{certificateModel.yearDisplay}}</p>
+              <h4>Score {{certificateModel.totalScore}}/{{certificateModel.maxScore}}</h4>             
+              <p class="obtained no__margin">Certificate obtained {{certificateModel.submittedOn | date:
+                'dd/MM/yyyy'}}</p>
+                <div class="logos">
+                  <img class="ASCLPDLogo" src="/assets/images/logos/Unison_Logo_Black.png" *ngIf="userType == 'ExamInvigilator'" alt="Unison" />                  
+                  <img class="ASCLPDLogo" src="/assets/images/logos/ASCLPD_logo.png" *ngIf="userType == 'SLT'" alt="ASCL" />
+                  <img class="examLogo" src="/assets/images/logos/exam__training.png" alt="ExamTraining" />
+                  <img class="ocrLogo" src="/assets/images/logos/ocr__logo.png" alt="OCR" />
+                  <img class="pearsonLogo" src="/assets/images/logos/pearson__logo.png" alt="Pearson" />
+                </div> -->
+            </div>
+            <br>
+            <div *ngIf="screenID === 2" class="certificate align__center">
+              <div id="certificate">
+                <div class="certificate__background">
+                  <img class="background" src="assets/images/certificate/certificate_background.png" />
+                    <div class="certificate__content">
+                      <img class="certificate__logo" src="/assets/images/logos/main__logo__alt.png" alt="Logo" />
+                      <div class="space">
+                        <h2 class="tertiary">{{certificateModel.assessmentName}}</h2>
+                        <h4>{{certificateModel.submittedOn | date :  "dd.MM.y"}}</h4>
+                      </div>
+                      <div class="space">
+                        <app-user-assessment-details-sections-list-minitem *ngFor="let section of certificateModel.sections" [section]="section"></app-user-assessment-details-sections-list-minitem>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div *ngIf="!actionPending" class="row divider__block__small">
+            <div class="col col__spansix col__offbythree">
+              <div class="col__evenpad">
+                <button type="button" class="btn btn__details margin__bottom btn__print__pdf">
+                  Save as Image
+                </button>
+              </div>
+            </div>
+            <div class="col col__spansix col__offbythree">
+              <div class="col__evenpad">
+                <button type="button" class="btn btn__details btn_blue margin__bottom" (click)="switchScreen()">
+                  {{switchScreenButtonText}}
+                </button>
+              </div>
+            </div>
+            <div class="col col__spansix col__offbythree">
+              <div class="col__evenpad">
+                <button class="btn btn__standard btn__cancel" type="button" (click)='goToInvigilatorDetails()'>
+                  Back to User Details
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

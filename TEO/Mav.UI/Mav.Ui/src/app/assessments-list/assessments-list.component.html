@@ -1,0 +1,92 @@
+<div id="options" class="row divider__block__small">
+  <div class="col col__spanthree">
+    <a href="JavaScript:void(0);" class="btn btn__add trigger__modal" data-modaltype="select_assessment">Add a new Assessment</a>
+  </div>
+  <div class="col col__spantwo col__offbytwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setYear($event.target.value)" class="grey">
+          <option selected value="0">Filter by Academic Year</option>
+          <option *ngFor="let year of yearList" value="{{year.yearID}}">
+              {{year.display}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setOrder($event.target.value)" class="grey">
+          <option selected disabled value="1">Order by...</option>
+          <option [value]="2">Order by Creation Date (desc)</option>
+          <option [value]="3">Order by Creation Date (asc)</option>
+          <option [value]="4">Order by Assessment Title</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spanthree">
+    <div class="col__evenpad">
+      <div class="search">
+        <div class="search__wrapper">
+          <input class="search__bar" type="search" name="searchTerms" #searchTerms />
+          <a href="JavaScript:void(0);" (click)="newSearch(searchTerms)" class="search__icon"><img src="/assets/images/icons/search.svg"
+              alt="Search" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="listing">
+
+  <app-assessments-list-item *ngFor="let assessment of searchModel.items" [assessment]="assessment"></app-assessments-list-item>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)"
+          class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+        <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)"
+          class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+  <!--Assessment Modal-->
+  <section id="myModal" class="modal" data-modaltype="select_assessment">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Add Assessment</h2>
+        <p>Please choose the type of assessment you want to create from the options below.</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='goToAddAssessment()' class="btn btn__standard cancel">Non-Timed Assessment</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+              <div class="col__evenpad">
+                  <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='goToAddEoQualification()' class="btn btn__standard cancel">Timed Assessment</a>
+                  <div class="spinner small" *ngIf="actionPending"></div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>

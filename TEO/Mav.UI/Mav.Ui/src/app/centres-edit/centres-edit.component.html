@@ -1,0 +1,102 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/centres")'>Centre Management</a>
+            </li>
+            <li>
+              <span>Edit Centre</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Edit Centre" />
+          <h5>Edit Centre</h5>
+        </div>
+        <div class="row">
+          <div class="col col__spanthree">
+            <div class="col__evenpad">
+              <div>
+                <a class="btn no__radius search" [ngClass]="{'btn__full': activeTab === 1, 'btn__full__alt': activeTab !== 1}"
+                  href="JavaScript:void(0);" (click)="setActiveTab(1)">
+                  Centre Details
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col col__spanthree">
+            <div class="col__evenpad">
+              <div>
+                <a class="btn no__radius search" [ngClass]="{'btn__full': activeTab === 2, 'btn__full__alt': activeTab !== 2}"
+                  href="JavaScript:void(0);" (click)="setActiveTab(2)">
+                  Exam Officers
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col col__spanthree">
+            <div class="col__evenpad">
+              <div>
+                <a class="btn no__radius search" [ngClass]="{'btn__full': activeTab === 3, 'btn__full__alt': activeTab !== 3}"
+                  href="JavaScript:void(0);" (click)="setActiveTab(3)">
+                  Invigilators
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col col__spanthree">
+            <div class="col__evenpad">
+              <div>
+                <a class="btn no__radius search" [ngClass]="{'btn__full': activeTab === 4, 'btn__full__alt': activeTab !== 4}"
+                  href="JavaScript:void(0);" (click)="setActiveTab(4)">
+                  SLT
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="alt" />
+        <div class="row">
+            <div class="col col__spantwelve">
+                <div class="col__evenpad">
+  
+                    <div *ngIf="activeTab === 1">
+                        <h4>Centre Details</h4>
+                        <app-centres-edit-form [id]="id"></app-centres-edit-form>
+                    </div>
+    
+                    <div *ngIf="activeTab === 2">
+                        <h4>Exam Officers</h4>
+                        <app-officers-wrapper [id]="id"></app-officers-wrapper>
+                    </div>
+
+                    <div *ngIf="activeTab === 3">
+                        <h4>Invigilators</h4>
+                        <app-invigilators-wrapper [id]="id"></app-invigilators-wrapper>
+                    </div>
+
+                    <div *ngIf="activeTab === 4">
+                      <h4>SLT/Line Managers</h4>
+                      <app-SLTs-wrapper [id]="id"></app-SLTs-wrapper>
+                  </div>
+  
+                </div>
+            </div>
+        </div> 
+        
+      </div>
+    </div>
+  </main>
+</div>

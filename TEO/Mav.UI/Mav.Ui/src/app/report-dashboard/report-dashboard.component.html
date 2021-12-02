@@ -1,0 +1,54 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <span>Report Dashboard</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <h2 class="tertiary align__center">Report <span class="primary">Dashboard</span></h2>
+        </div>
+        <div class="row">
+
+          <div class="col col__spansix" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/reporting-centre")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Centre Reports" />
+                  <h6 class="primary align__center no__margin">Centre Reports</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col__spansix" *ngIf="isUserAdministrator()">
+            <div class="col__evenpad">
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/reporting")'>
+                <div class="dashboard__wrapper">
+                  <img src="/assets/images/icons/assessments.svg" alt="Assessment Reports" />
+                  <h6 class="primary align__center no__margin">Assessment Reports</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>

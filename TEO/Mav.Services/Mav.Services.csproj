@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mav.Common\Mav.Common.csproj" />
+    <ProjectReference Include="..\Mav.Data\Mav.Data.csproj" />
+    <ProjectReference Include="..\Mav.Models\Mav.Models.csproj" />
+    <ProjectReference Include="..\Mav.Services.Identity\Mav.Services.Identity.csproj" />
+  </ItemGroup>
+
+</Project>

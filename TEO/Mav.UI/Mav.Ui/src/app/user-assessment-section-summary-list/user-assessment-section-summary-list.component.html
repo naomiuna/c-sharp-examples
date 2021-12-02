@@ -1,0 +1,21 @@
+<table *ngFor="let grouping of summary; let idx = index;">
+  <tr *ngIf="!!grouping.groupName && grouping.groupName.length > 0">
+    <th width="50%" class="question">{{grouping.groupName}}</th>
+    <th width="20%">You Answered</th>
+    <th width="20%">&nbsp;</th>
+    <th width="10%">&nbsp;</th>
+  </tr>
+  <tr *ngFor="let qitem of grouping.questions;">
+    <td width="50%" valign="top" class="question">{{qitem.questionNumber}}. {{qitem.questionTitle}}</td>
+    <td width="20%" valign="top" class="answer"><span>{{qitem.myAnswerText}}</span></td>
+    <td width="20%" valign="top">{{qitem.myAnswerCorrect === 1 ? 'Correct' : 'Incorrect'}}</td>
+    <td width="10%" valign="top">
+      &nbsp;<a *ngIf="!!qitem.questionHintText && qitem.questionHintText.length > 0 && qitem.myAnswerCorrect === 0" href="JavaScript:void(0);" class="info tool-left">&nbsp;
+          <div class="tooltip">
+            <p>Incorrect Answer</p>
+            <p>{{qitem.questionHintText}}</p>
+          </div>
+        </a>
+    </td>
+  </tr>
+</table>

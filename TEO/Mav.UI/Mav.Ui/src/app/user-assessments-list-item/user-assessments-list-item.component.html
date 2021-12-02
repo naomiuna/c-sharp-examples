@@ -1,0 +1,38 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Assessment Title</p>
+          <p>{{assessment.title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Academic Year</p>
+          <p>{{assessment.yearID}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <p class="bold">Assessment Status</p>
+          <p>
+            <span>{{assessment.statusID | assessmentstatus}}</span>
+            <span *ngIf="!!assessment.submittedOn"> ({{assessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree" *ngIf="!actionPending">
+      <div class="col__evenpad">
+        <div class="list__info down">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">View Assessment Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

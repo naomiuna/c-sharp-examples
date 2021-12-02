@@ -1,0 +1,33 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("slts")'>List of SLT/Line Manager Users</a>
+            </li>
+            <li>
+              <span>Add a New SLT/Line Manager</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/add.svg" alt="Slts" />
+          <h5>Add a new SLT/Line Manager</h5>
+        </div>
+        <p>Please enter the details of the new SLT/Line Manager by using the form below:</p>
+        <app-add-slt-form></app-add-slt-form>
+      </div>
+    </div>
+  </main>
+</div>

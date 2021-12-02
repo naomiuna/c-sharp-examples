@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mappings\Resolvers\**" />
+    <EmbeddedResource Remove="Mappings\Resolvers\**" />
+    <None Remove="Mappings\Resolvers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mav.Common\Mav.Common.csproj" />
+    <ProjectReference Include="..\Mav.Data\Mav.Data.csproj" />
+    <ProjectReference Include="..\Mav.Models\Mav.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,71 @@
+<div id="options" class="row divider__block__small">
+  <div class="col col__spanthree">
+    <a href="JavaScript:void(0);" (click)='goToComponent("admin/organisations-create")' class="btn btn__add">Add a new Organisation</a>
+  </div>
+
+  <div class="col col__spantwo col__offbytwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setFilter($event.target.value)" class="grey">
+          <option selected value="0">Filter by</option>
+          <option [value]="0">Clear filter</option>
+          <option [value]="1">Filter by Active</option>
+          <option [value]="2">Filter by Expired</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <select (change)="setOrder($event.target.value)" class="grey">
+          <option selected disabled value="1">Order by</option>
+          <option [value]="1">Order by Organisation Name</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col__spanthree">
+    <div class="col__evenpad">
+      <div class="search">
+        <div class="search__wrapper">
+          <input class="search__bar" type="search" name="searchTerms" #searchTerms />
+          <a href="JavaScript:void(0);" (click)="newSearch(searchTerms)" class="search__icon"><img src="/assets/images/icons/search.svg"
+              alt="Search" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="listing">
+
+  <app-licence-management-list-item *ngFor="let organisation of searchModel.items" [organisation]="organisation"></app-licence-management-list-item>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)"
+          class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+        <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)"
+          class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>

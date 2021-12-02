@@ -1,0 +1,120 @@
+﻿@model Mav.IDP.Quickstart.Account.RegisterUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+<form asp-controller="Register" asp-action="Invigilator" class="fill__form gutter__small">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <h4>TEO Online Portal Registration Form</h4>
+    <div class="row row__negative20">
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="row row__negative20">
+                    <div class="col col__spansix" data-type="main">
+                        <div class="col__evenpad">
+                            <div class="formrow fill cf">
+                                <label>First Name<em>*</em></label>
+                                <input asp-for="FirstName" maxlength="100" autofocus />
+                                <span asp-validation-for="FirstName" class="validate-error-row"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col__spansix" data-type="main">
+                        <div class="col__evenpad">
+                            <div class="formrow fill cf">
+                                <label>Surname<em>*</em></label>
+                                <input asp-for="Surname" maxlength="100" />
+                                <span asp-validation-for="Surname" class="validate-error-row"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Email address<em>*</em></label>
+                    <input type="email" asp-for="Email" maxlength="250" />
+                    <span asp-validation-for="Email" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Confirm Email Address<em>*</em></label>
+                    <input type="email" asp-for="ConfirmEmail" maxlength="250" />
+                    <span asp-validation-for="ConfirmEmail" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Centre Number</label>
+                    <input asp-for="CentreNumber" maxlength="100" />
+                    <span asp-validation-for="CentreNumber" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>User Role<em>*</em></label>
+                    <select asp-for="Role">
+                        <option value="0" selected disabled>&nbsp;</option>
+                        <option value="Exams Officer">Exams Officer</option>
+                        <option value="Invigilator">Invigilator</option>
+                        <option value="SLT">SLT</option>
+                    </select>
+                    <span asp-validation-for="Role" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Password<em>*</em></label>
+                    <input type="password" asp-for="Password" maxlength="30" autocomplete="off" />
+                    <span asp-validation-for="Password" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Confirm Password<em>*</em></label>
+                    <input type="password" asp-for="ConfirmPassword" maxlength="30" autocomplete="off" />
+                    <span asp-validation-for="ConfirmPassword" class="validate-error-row"></span>
+                </div>
+                <div class="formrow">
+                    <input type="checkbox" asp-for="Enabled" value="true" />
+                    <label for="checkbox">Agree to <a href="#" class="link register__terms__link">Terms and Conditions?</a></label>
+                    <span asp-validation-for="Enabled" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div id="register__terms" class="col col__spantwelve terms__hidden">
+            <div class="col__evenpad">
+                <div class="termsandconditions">
+                    <p class="align__center">@ViewBag.TermsAndConditionsTitle</p>
+                    @Html.Raw(@ViewBag.TermsAndConditionsContent)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row__negative20">
+        <div class="col col__spansix col__offbythree">
+            <div class="col__evenpad">
+                <div class="formrow cf">
+                    <div class="align__center">
+                        <button class="btn btn__standard" name="button" value="register">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

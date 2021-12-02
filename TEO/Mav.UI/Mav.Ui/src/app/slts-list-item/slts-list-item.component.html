@@ -1,0 +1,40 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>{{user.firstName}} {{user.surname}}</h5>
+          <p>{{user.email}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Latest Assessment</h5>
+          <p *ngIf="!!user.latestAssessment">{{user.latestAssessment.title}}</p>
+          <p *ngIf="user.latestAssessment === null">N/A</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Assessment Completion</h5>
+          <p *ngIf="!!user.latestAssessment">
+            <span>{{user.latestAssessment.statusID | assessmentstatus}}</span>
+            <span *ngIf="!!user.latestAssessment.submittedOn"> ({{user.latestAssessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+          </p>
+          <p *ngIf="user.latestAssessment === null">N/A</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">View SLT Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

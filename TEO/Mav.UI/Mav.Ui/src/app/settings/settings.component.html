@@ -1,0 +1,33 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <span>Settings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Settings" />
+          <h5>Settings</h5>
+        </div>
+        <h4>General Settings</h4>
+        <app-settings-list></app-settings-list>
+        <app-settings-organisationtype-list></app-settings-organisationtype-list>
+        <app-settings-centretype-list></app-settings-centretype-list>
+        <app-settings-years-list></app-settings-years-list>
+      </div>
+    </div>
+  </main>
+</div>

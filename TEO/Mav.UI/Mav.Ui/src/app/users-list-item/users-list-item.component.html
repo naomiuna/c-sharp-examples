@@ -1,0 +1,36 @@
+<div class="list__item">
+  <div class="row">
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>{{user.firstName}} {{user.surname}}</h5>
+          <p>{{user.email}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Role Type</h5>
+          <p>{{user.role}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Enabled</h5>
+          <p *ngIf="user.enabled === true"><span class="true">true</span></p>
+          <p *ngIf="user.enabled === false"><span class="false">false</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">Edit User Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

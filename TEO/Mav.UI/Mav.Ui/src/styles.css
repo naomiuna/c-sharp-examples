@@ -1,0 +1,4 @@
+@import '~assets/css/compiled.min.css';
+@import '~assets/css/validation.css';
+@import '~assets/css/admin.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';

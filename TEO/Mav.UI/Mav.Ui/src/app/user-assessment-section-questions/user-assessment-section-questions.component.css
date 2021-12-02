@@ -1,0 +1,104 @@
+.flex__between {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.endModalWrapper, .confirmLeaveModalWrapper {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modalContent {
+    background-color: rgb(48, 48, 48);
+    color: #FFFFFF;
+    margin: 5% auto;
+    padding: 40px 25px 40px 25px;
+    width: 35%;
+    position: relative;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1024px) {
+    .modalContent {
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 728px) {
+    .modalContent {
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 468px) {
+    .modalContent {
+        width: 90%;
+    }
+}
+
+.modalContent h3 {
+    color: #FFFFFF;
+}
+
+.submit {
+    display: block;
+    background-color: #E74011;
+    color: #FFFFFF;
+    padding: 10px;
+    font-weight: bold;
+    width: 100%;
+    max-width: 275px;
+    margin: 20px auto 0 auto;
+    cursor: pointer;
+}
+.submit:hover {
+    background-color: rgba(231, 64, 17, 0.5);
+    color: #FFFFFF;
+}
+
+.cancel {
+    display: block;
+    background-color: #FFFFFF;
+    padding: 10px;
+    color: rgb(48, 48, 48);
+    font-weight: bold;
+    width: 100%;
+    max-width: 275px;
+    margin: 20px auto 0 auto;
+    cursor: pointer;
+}
+.cancel:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgb(48, 48, 48);
+}
+
+.close {
+    color: #FFFFFF;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+  .close:hover,
+  .close:focus {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+
+.question {
+    border: 1px solid #e5e5e5;
+    padding: 25px;
+    box-shadow: 0 5px 10px 2px rgba(0,0,0,.1);
+}
+
+  

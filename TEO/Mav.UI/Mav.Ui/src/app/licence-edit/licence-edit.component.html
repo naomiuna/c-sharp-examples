@@ -1,0 +1,32 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/licence-management")'>Licence Management</a>
+            </li>
+            <li>
+              <span>Edit Licence</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Edit Licence" />
+          <h5>Edit Licence</h5>
+        </div>
+        <app-licence-edit-form [id]="id"></app-licence-edit-form>
+      </div>
+    </div>
+  </main>
+</div>

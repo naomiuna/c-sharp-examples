@@ -1,0 +1,40 @@
+<p class="bold">Assessment History</p>
+<div class="row">
+  <div class="col col__spantwo col__offbyten">
+    <div class="search">
+      <select (change)="setYear($event.target.value)" class="grey">
+        <option selected value="0">Filter by Academic Year</option>
+        <option *ngFor="let year of yearList" value="{{year.yearID}}">
+            {{year.display}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="listing">
+
+  <app-user-assessment-history-list *ngFor="let assessment of searchModel.items" [assessment]="assessment" [userID]="userID"></app-user-assessment-history-list>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)" class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+          <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)" class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<form [formGroup]="changeProfileForm" (ngSubmit)="saveChanges()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Your details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">First Name<em>*</em></label>
+              <input type="text" class="primary" name="FirstName" id="FirstName" placeholder="Please enter your first name"
+                [formControl]="changeProfileForm.controls['FirstName']" />
+              <validation-message fieldName="FirstName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Surname<em>*</em></label>
+              <input type="text" class="primary" name="Surname" id="Surname" placeholder="Please enter your surname"
+                [formControl]="changeProfileForm.controls['Surname']" />
+              <validation-message fieldName="Surname"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Email Address<em>*</em></label>
+              <input type="email" class="primary" name="Email" id="Email" placeholder="Please enter your email address"
+                [formControl]="changeProfileForm.controls['Email']" />
+              <validation-message fieldName="Email"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve" *ngIf="profileDetails.canEditCentre">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Centre Name<em>*</em></label>
+              <input type="text" class="primary" name="CentreName" id="CentreName" placeholder="Please enter your centre name"
+                [formControl]="changeProfileForm.controls['CentreName']" />
+              <validation-message fieldName="CentreName"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve" *ngIf="profileDetails.canEditCentre">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Centre Number</label>
+              <input type="text" class="primary" name="CentreNumber" id="CentreNumber" placeholder="Please enter your centre number"
+                [formControl]="changeProfileForm.controls['CentreNumber']" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+    </div>
+  </div>
+</form>

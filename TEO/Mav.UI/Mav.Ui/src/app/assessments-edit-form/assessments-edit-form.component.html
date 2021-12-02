@@ -1,0 +1,139 @@
+<form [formGroup]="editAssForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Assessment details have been successfully saved.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <input type="hidden" id="hdnApiBaseUrl" value="{{apiBaseUrl}}" />
+  <input type="hidden" id="hdnAuthorityUrl" value="{{authorityUrl}}" />
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve" data-type="main">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Title<em>*</em></label>
+              <input type="text" class="primary" name="Title" id="Title" placeholder="Please enter a title"
+                [formControl]="editAssForm.controls['Title']" />
+              <validation-message fieldName="Title"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Target User Group<em>*</em></label>
+              <mat-select placeholder="Target User Group"
+                  name="RoleID" id="RoleID" [formControl]="editAssForm.controls['RoleID']">
+                    <mat-option *ngFor="let item of roleList" [value]="item.roleID">
+                    {{ item.name }}
+                    </mat-option>
+              </mat-select>
+              <validation-message fieldName="RoleID"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Academic Year<em>*</em></label>
+              <mat-select placeholder="Academic year" name="YearID" id="YearID" [formControl]="editAssForm.controls['YearID']">
+                <mat-option *ngFor="let item of yearList" [value]="item.yearID">
+                  {{ item.display }}
+                </mat-option>
+              </mat-select>
+              <validation-message fieldName="YearID"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <!--Check for if Eo Qualification or not-->
+        <div *ngIf="!eoQualification">
+          <div class="col col__spantwelve">
+            <div class="col__evenpad">
+              <div class="formrow fill cf">
+                <label class="primary">Minimum Score (%)<em>*</em></label>
+                <input type="number" class="primary" name="MinScore" id="MinScore" placeholder="Please enter a minimum score"
+                  [formControl]="editAssForm.controls['MinScore']" />
+                <validation-message fieldName="MinScore"></validation-message>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Pass Score (%)<em>*</em></label>
+              <input type="number" class="primary" name="PassScore" id="PassScore" placeholder="Please enter a minimum pass score"
+                [formControl]="editAssForm.controls['PassScore']" />
+              <validation-message fieldName="PassScore"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Merit Score (%)<em>*</em></label>
+              <input type="number" class="primary" name="MeritScore" id="MeritScore" placeholder="Please enter a minimum merit score"
+                [formControl]="editAssForm.controls['MeritScore']" />
+              <validation-message fieldName="MeritScore"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="eoQualification" class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Distinction Score (%)<em>*</em></label>
+              <input type="number" class="primary" name="DistinctionScore" id="DistinctionScore" placeholder="Please enter a minimum distinction score"
+                [formControl]="editAssForm.controls['DistinctionScore']" />
+              <validation-message fieldName="DistinctionScore"></validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Guide<em>*</em></label>
+              <angular-tinymce [formControl]="editAssForm.controls['Guide']" [settings]="customEditorSettings"></angular-tinymce>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Objectives<em>*</em></label>
+              <angular-tinymce [formControl]="editAssForm.controls['Objectives']" [settings]="customEditorSettings"></angular-tinymce>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Published<em>*</em></label>
+              <mat-slide-toggle
+                  (change)="changePublished($event)"
+                  class="example-margin"
+                  [checked]="isPublished">
+                  Published?
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard" type="submit">
+          Save Changes 
+          <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()">
+          Back to listing
+        </button>
+      </div>
+      <div class="spinner small" *ngIf="actionPending"></div>
+    </div>
+  </div>
+</form>

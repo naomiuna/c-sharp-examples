@@ -1,0 +1,64 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/report-dashboard")'>Report Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/reporting")'>Assessments</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/reporting")'>Assessment Reports</a>
+            </li>
+            <li>
+              <span> Section Reports</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessment Section Details" />
+          <h5>Reporting</h5>
+        </div>
+        <h4>Section Reports</h4>
+
+        <div id="options" class="row divider__block__small">
+          <div class="col col__spanthree">
+            <div class="col__evenpad">
+              <div class="search">
+                <a *ngIf="!submitting" href="JavaScript:void(0);" (click)='downloadCsv()' class="btn btn__details">Download Reports as CSV</a>
+                <a *ngIf="submitting" href="Javascript:void(0);" class="btn btn__details btn_disabled">Download Reports as CSV</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <app-reporting-section-item *ngFor="let item of sectionModel" [item]="item"></app-reporting-section-item>
+
+        <div class="list__item" *ngIf="count === 0">
+          <div class="row">
+            <div class="col col__spantwelve">
+              <div class="col__evenpad">
+                <div class="list__info">
+                  <p>{{loadingText}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>

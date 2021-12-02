@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col col__spantwo">
+        <div class="col__evenpad">
+            <div>
+                <a class="btn no__radius sections" [ngClass]="{'btn__sub__full': activeTab === 1, 'btn__sub__full__alt': activeTab !== 1}"
+                    href="JavaScript:void(0);" (click)="setActiveTab(1)">
+                    Section Overview
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col col__spantwo">
+        <div class="col__evenpad">
+            <div>
+                <a class="btn no__radius sections" [ngClass]="{'btn__sub__full': activeTab === 2, 'btn__sub__full__alt': activeTab !== 2}"
+                    href="JavaScript:void(0);" (click)="setActiveTab(2)">
+                    Confirmation Statement
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col col__spantwo">
+        <div class="col__evenpad">
+            <div>
+                <a class="btn no__radius sections" [ngClass]="{'btn__sub__full': activeTab === 3, 'btn__sub__full__alt': activeTab !== 3}"
+                    href="JavaScript:void(0);" (click)="setActiveTab(3)">
+                    Question Categories
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col col__spantwo">
+        <div class="col__evenpad">
+            <div>
+                <a class="btn no__radius sections" [ngClass]="{'btn__sub__full': activeTab === 4, 'btn__sub__full__alt': activeTab !== 4}"
+                    href="JavaScript:void(0);" (click)="setActiveTab(4)">
+                    Questions
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="alt" />
+<div class="row">
+    <div class="col col__spantwelve">
+        <div class="col__evenpad">
+
+            <div *ngIf="activeTab === 1">
+                <h4>Section Overview</h4>
+                <app-assessments-section-edit-form [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit-form>
+            </div>
+
+            <div *ngIf="activeTab === 2">
+                <h4>Confirmation Statement</h4>
+                <app-assessments-section-edit-statement [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit-statement>
+            </div>
+
+            <div *ngIf="activeTab === 3">
+                <h4>Question Categories</h4>
+                <app-assessments-section-edit-categories [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit-categories>
+            </div>
+
+            <div *ngIf="activeTab === 4">
+                <h4>Questions</h4>
+                <app-assessments-section-edit-questions [id]="id" (sectionActionRequest)="sectionEventRaised($event)"></app-assessments-section-edit-questions>
+            </div>
+
+        </div>
+    </div>
+</div>

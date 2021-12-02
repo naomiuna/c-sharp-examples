@@ -1,0 +1,20 @@
+<div class="links">
+  <a href="JavaScript:void(0);" (click)='goToPortal()'>Online Portal</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("my-account")'>My Account</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("invigilators")' *ngIf="isUserExamOfficer()">My Invigilators</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("slts")' *ngIf="isUserExamOfficer()">My SLT/Line Managers</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("officers")' *ngIf="isUserExamOfficer()">Manage Exams Officers</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("user-assessments")' *ngIf="isUserExamInvigilator() || isUserSLT() || isUserExamOfficer()">Assessments</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/web")' *ngIf="isUserAdministrator() || isUserEditor()">Web Content</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/centres")' *ngIf="isUserAdministrator()">Centre Management</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/assessments")' *ngIf="isUserAdministrator() || isUserEditor()">Assessments</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/users")' *ngIf="isUserAdministrator()">Admin Users</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/reporting")' *ngIf="isUserAdministrator()">Reporting</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/licence-management")' *ngIf="isUserAdministrator()">Licence Management</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("admin/settings")' *ngIf="isUserAdministrator()">Settings</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("terms-and-conditions")'>Terms &amp; Conditions</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("privacy-policy")'>Privacy Policy</a>
+  <a href="JavaScript:void(0);" (click)='goToComponent("security-confidentiality-agreement")'>Security and Confidentiality Agreement</a>
+  <a href="JavaScript:void(0);" (click)='goToChangePassword()'>Change Password</a>
+  <a href="JavaScript:void(0);" (click)='goLogout()'>Logout</a>
+</div>

@@ -1,0 +1,50 @@
+<div class="listing">
+  <div class="row">
+    <div class="col col__spanone">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h2> - </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Centre Name</h5>
+          <p>{{centre.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Centre Nmber</h5>
+          <p>{{centre.number}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Officer Name</h5>
+          <p>{{centre.officerName}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spantwo">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <h5>Created On</h5>
+          <p>{{centre.enabled | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spanthree">
+      <div class="col__evenpad">
+        <div class="list__info">
+          <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__details">View Centre</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

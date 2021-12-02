@@ -1,0 +1,108 @@
+<div class="list__item submit__assessment">
+  <div class="row">
+    <div class="col col__spantwelve">
+      <div class="col__evenpad">
+        <h5>Total Result</h5>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="col__evenpad">
+        <div class="details">
+          <p><span class="bold">Sections Completed: </span><span>{{totals.totalSectionsCompleted}}/{{totals.totalSections}}</span></p>
+          <p class="no__margin"><span class="bold">Total Result: </span>{{totals.totalScore}}/{{totals.maxScore}}</p>
+          <p  *ngIf="totals.grade != null" class="no__margin"><span class="bold">Grade: </span>{{totals.grade}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col col__spansix">
+      <div class="col__evenpad">
+        <div *ngIf="!actionPending 
+                    && isUserExamInvigilator()
+                    && totals.actionAllowed 
+                    && !totals.submitted 
+                    && totals.totalSectionsCompleted === totals.totalSections
+                    && !noSections" class="submit__assessments__buttons">
+          <!--<a *ngIf="totals.passRateReached" href="JavaScript:void(0);" class="btn btn__details trigger__modal" data-modaltype="submit_assessment_modal">Submit Assessment to Exams Officer</a>
+          <a *ngIf="!totals.passRateReached" href="JavaScript:void(0);" class="btn btn__details trigger__modal" data-modaltype="submit_assessment_modal">Submit Failed Assessment to Exams Officer</a>-->
+          <a *ngIf="totals.passRateReached || !totals.passRateReached" href="JavaScript:void(0);" class="btn btn__details trigger__modal" data-modaltype="submit_assessment_modal">Claim Certification</a>
+        </div>
+        <div *ngIf="!actionPending 
+                    && (isUserExamOfficer() || isUserSLT())
+                    && totals.actionAllowed 
+                    && !totals.submitted 
+                    && totals.totalSectionsCompleted === totals.totalSections
+                    && !noSections">  
+            <!--<a *ngIf="totals.passRateReached" href="JavaScript:void(0);" (click)="actionSubmitAssessment()" class="btn btn__details">Submit Assessment</a>
+            <a *ngIf="!totals.passRateReached" href="JavaScript:void(0);" (click)="actionSubmitAssessment()" class="btn btn__details">Submit Failed Assessment</a>-->
+            <a *ngIf="totals.passRateReached || !totals.passRateReached" href="JavaScript:void(0);" (click)="actionSubmitAssessment()" class="btn btn__details">Claim Certification</a>
+          </div>
+        <div *ngIf="!actionPending && totals.submitted" class="submit__assessments__buttons">
+          <a href="JavaScript:void(0);" class="btn btn__details disable">
+            Submitted <span *ngIf="!!totals.submittedOn">on {{totals.submittedOn | date: 'dd/MM/yyyy'}}</span>
+          </a>
+        </div>
+        <div *ngIf="!actionPending && totals.submitted && totals.totalSectionsCompleted === -99" class="submit__assessments__buttons">
+          <a href="JavaScript:void(0);" (click)="viewCerfificate()" class="btn btn__details">View Certificate</a>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!actionPending && totals.submitted" class="list__item submit__assessment">
+  <div class="row">
+    <div class="col col__spantwelve">
+      <div class="col__evenpad">
+        <h5>Additional Information</h5>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col__spantwelve">
+      <div class="col__evenpad">
+        <div class="details">
+          <p class="no__margin">To obtain a copy of your certificate, please contact your Exams Officer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="myModal" class="modal" data-modaltype="submit_assessment_modal">
+  <div id="modal__content">
+    <span class="closeModal">&times;</span>
+    <h2>Claim Certification</h2>
+    <p>Once you have submitted your assessment your Exams Officer will be able to obtain your certificate. However, you will not be able to
+      restart any of the sections within this assessment.</p>
+    <div class="row">
+        <div class="col col__spantwelve">
+          <label class="primary">Please agree to the {{pageTitle}}</label>
+          <mat-slide-toggle
+              (change)="changeTermsAgreed($event)"
+              class="example-margin"
+              [checked]="isTermsAgreed">
+              Please agree to the {{pageTitle}}
+          </mat-slide-toggle>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="termsandconditions">
+          <div [innerHTML]="pageContent | safeHtml" class="tiny_page"></div>
+        </div>
+      </div>        
+    </div>
+    <div *ngIf="!actionPending" class="row buttons">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+
+          <a *ngIf="!isTermsAgreed" href="JavaScript:void(0);" class="btn btn__details btn_disabled">Submit Assessment</a>
+          <a *ngIf="isTermsAgreed" href="JavaScript:void(0);" (click)="actionSubmitAssessment()" class="btn btn__details">Submit Assessment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+﻿@model RequestPasswordResetViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<form asp-route="ResendActivation" class="fill__form margin__top">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <h4>Resend Activation Email</h4>
+    <div class="formrow fill cf">
+        <label>Email address<em>*</em></label>
+        <input type="email" class="alt" asp-for="Email" maxlength="250" autofocus />
+        <span asp-validation-for="Email" class="validate-error-row"></span>
+    </div>
+    <button class="btn btn__standard margin__top margin__bottom" name="button" value="send">Send</button>
+    <div class="align__right">
+        <a asp-controller="Account" asp-action="Login" class="link">Back to Login</a>
+    </div>
+</form>

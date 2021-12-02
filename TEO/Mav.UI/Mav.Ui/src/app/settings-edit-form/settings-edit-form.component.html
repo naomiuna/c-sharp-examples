@@ -1,0 +1,57 @@
+<form [formGroup]="editSettingForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> The settings have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Setting Name (non-editable)<em>*</em></label>
+              <input type="text" class="primary" name="Name" id="Name" placeholder="Please enter your setting name"
+                [formControl]="editSettingForm.controls['Name']" readonly />
+              <validation-message fieldName="Name"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Data Type (non-editable)<em>*</em></label>
+              <input type="text" class="primary" name="DataType" id="DataType" placeholder="Please enter your setting data type"
+                [formControl]="editSettingForm.controls['DataType']" readonly />
+              <validation-message fieldName="DataType"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Setting Value<em>*</em></label>
+              <input type="text" class="primary" name="Entry" id="Entry" placeholder="Please enter your setting value"
+                [formControl]="editSettingForm.controls['Entry']" />
+              <validation-message fieldName="Entry"></validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

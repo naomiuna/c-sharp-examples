@@ -1,0 +1,89 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("admin/assessments")'>Assessments</a>
+            </li>
+            <li>
+              <span>Edit Assessment</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Edit Assessment" />
+          <h5>Edit Assessment</h5>
+        </div>
+        <div class="row">
+            <div class="col col__spanfour">
+                <div class="col__evenpad">
+                    <div>
+                        <a class="btn no__radius search" 
+                        [ngClass]="{'btn__full': activeTab === 1, 'btn__full__alt': activeTab !== 1}" 
+                        href="JavaScript:void(0);" (click)="setActiveTab(1)">
+                        Assessment Overview
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col__spanfour">
+                <div class="col__evenpad">
+                    <div>
+                        <a class="btn no__radius search" 
+                        [ngClass]="{'btn__full': activeTab === 2, 'btn__full__alt': activeTab !== 2}" 
+                        href="JavaScript:void(0);" (click)="setActiveTab(2)">
+                        Assessment Sections
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col col__spanfour">
+                <div class="col__evenpad">
+                    <div>
+                        <a class="btn no__radius search" 
+                        [ngClass]="{'btn__full': activeTab === 3, 'btn__full__alt': activeTab !== 3}" 
+                        href="JavaScript:void(0);" (click)="setActiveTab(3)">
+                        Confirmation Statement
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <hr class="alt"/>
+        <div class="row">
+            <div class="col col__spantwelve">
+                <div class="col__evenpad">
+  
+                    <div *ngIf="activeTab === 1">
+                        <h4>Assessment Overview</h4>
+                        <app-assessments-edit-form [id]="id"></app-assessments-edit-form>
+                    </div>
+    
+                    <div *ngIf="activeTab === 2">
+                        <h4>Assessment Sections</h4>
+                        <app-assessments-sections [id]="id" [tabevents]="tabEvents.asObservable()"></app-assessments-sections>
+                    </div>
+
+                    <!-- <div *ngIf="activeTab === 3">
+                        <h4>Confirmation Statement</h4>
+                        <app-assessments-edit-statement [id]="id"></app-assessments-edit-statement>
+                    </div> -->
+  
+                </div>
+            </div>
+        </div>        
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,51 @@
+﻿@model VerifyAdminViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+<form asp-controller="Register" asp-action="VerifyAdmin" class="fill__form gutter__small">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="Token" />
+    <input type="hidden" asp-for="Success" />
+    <h4>Registration: Verification</h4>
+    @if (Model.Success)
+    {
+    <div class="row row__negative20">
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Password<em>*</em></label>
+                    <input type="password" asp-for="Password" maxlength="30" autocomplete="off" />
+                    <span asp-validation-for="Password" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col col__spansix" data-type="main">
+            <div class="col__evenpad">
+                <div class="formrow fill cf">
+                    <label>Confirm Password<em>*</em></label>
+                    <input type="password" asp-for="ConfirmPassword" maxlength="30" autocomplete="off" />
+                    <span asp-validation-for="ConfirmPassword" class="validate-error-row"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row__negative20">
+        <div class="col col__spansix col__offbythree">
+            <div class="col__evenpad">
+                <div class="formrow cf">
+                    <div class="align__center">
+                        <button class="btn btn__standard" name="button" value="verify">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+    <p><strong>Error!</strong> There was an issue during your account verification.</p>
+    }
+</form>

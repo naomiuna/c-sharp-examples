@@ -1,0 +1,83 @@
+<div id="options" class="row divider__block__small">
+
+  <div class="col col__spanthree">
+    <div class="col__evenpad">
+      <div class="search">
+        <a *ngIf="!submitting" href="JavaScript:void(0);" (click)='downloadCsv()' class="btn btn__details">Download Reports as CSV</a>
+        <a *ngIf="submitting" href="Javascript:void(0);" class="btn btn__details btn_disabled">Download Reports as CSV</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col__spantwo col__offbyone">
+    <div class="col__evenpad">
+      <div class="search alt">
+        <a href="JavaScript:void(0);" (click)='clearFilters()' class="btn btn__standard btn__cancel">Clear filter</a>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search alt">
+        <select (change)="setYear($event.target.value)" class="grey">
+          <option selected value="0">Filter by Academic Year</option>
+          <option *ngFor="let year of yearList" value="{{year.yearID}}">
+            {{year.display}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search alt">
+        <select (change)="setOrder($event.target.value)" class="grey">
+          <option selected disabled value="1">Order by</option>
+          <option [value]="1">Order by Assessment Title</option>
+          <option [value]="2">Order by Creation Date (desc)</option>
+          <option [value]="3">Order by Creation Date (asc)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col col__spantwo">
+    <div class="col__evenpad">
+      <div class="search">
+        <div class="search__wrapper alt">
+          <input class="search__bar" type="search" name="searchTerms" #searchTerms />
+          <a href="JavaScript:void(0);" (click)="newSearch(searchTerms)" class="search__icon"><img src="/assets/images/icons/search.svg"
+              alt="Search" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="listing">
+
+  <app-reporting-assessment-list-item *ngFor="let assessment of searchModel.items" [assessment]="assessment"></app-reporting-assessment-list-item>
+
+  <div class="list__item" *ngIf="searchModel.count === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="align__center">
+    <ul class="inline__list">
+      <li><a *ngIf="searchModel.hasPrevious" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo - 1)"
+          class="direction"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+      <li *ngFor="let pgdx of paginationItems" [ngClass]="{active: pgdx === filterModel.pageNo}">
+        <a href="JavaScript:void(0);" (click)="PaginateSearch(pgdx)">{{ pgdx }}</a>
+      </li>
+      <li><a *ngIf="searchModel.hasNext" href="JavaScript:void(0);" (click)="PaginateSearch(filterModel.pageNo + 1)"
+          class="direction"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>

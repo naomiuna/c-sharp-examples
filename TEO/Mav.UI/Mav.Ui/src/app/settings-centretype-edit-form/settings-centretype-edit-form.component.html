@@ -1,0 +1,81 @@
+<form [formGroup]="editCentreTypeForm" (ngSubmit)="submitForm()" class="fill__form" novalidate #mainForm>
+  <div class="alert alert-account-success" *ngIf="updateOk">
+    <strong>Success!</strong> Centre type details have been successfully updated.
+  </div>
+  <div class="alert alert-account-danger" [innerHtml]="error" *ngIf="error"></div>
+  <div class="alert alert-account-info" [innerHtml]="info" *ngIf="info"></div>
+  <div class="row">
+    <div class="col col__spansix">
+      <div class="row row__negative20">
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Code<em>*</em></label>
+              <input type="text" class="primary" name="Code" id="Code" placeholder="Please enter a code value"
+                [formControl]="editCentreTypeForm.controls['Code']" maxlength="10" />
+              <validation-message fieldName="Code"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Name<em>*</em></label>
+              <input type="text" class="primary" name="Name" id="Name" placeholder="Please enter a centre type name"
+                [formControl]="editCentreTypeForm.controls['Name']" />
+              <validation-message fieldName="Name"></validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col col__spantwelve">
+          <div class="col__evenpad">
+            <div class="formrow fill cf">
+              <label class="primary">Max Centre Invigilators (leave blank or set to 0 to inherit from global settings)</label>
+              <input type="number" class="primary" name="MaxInvigilators" id="MaxInvigilators" placeholder="The maximum number of allowable invigilators per centre"
+                [formControl]="editCentreTypeForm.controls['MaxInvigilators']" maxlength="6" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formrow fill cf">
+        <div *ngIf="!actionPending">
+          <button class="btn btn__standard" type="submit">
+            Save Changes 
+            <i *ngIf="!actionPending && (updateOk || !!error)" class="fa" [ngClass]="{'fa-thumbs-o-up':updateOk, 'fa-thumbs-o-down':error.length > 0}" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="spinner small" *ngIf="actionPending"></div>
+      </div>
+      <div *ngIf="!actionPending"class="formrow fill cf">
+          <button class="btn btn__standard delete trigger__modal" data-modaltype="del_centretype_modal">
+              Delete Centre Type
+          </button>
+      </div>
+      <div *ngIf="!actionPending" class="formrow fill cf">
+        <button class="btn btn__standard btn__cancel" type="button" (click)="cancelForm()" >
+          Back to Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<section id="myModal" class="modal" data-modaltype="del_centretype_modal">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Delete Centre Type</h2>
+        <p>Are you sure you want to delete this centre type?</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDelete()' class="btn btn__standard delete cancel">Delete Centre Type</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a href="#" class="btn btn__standard cancel">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

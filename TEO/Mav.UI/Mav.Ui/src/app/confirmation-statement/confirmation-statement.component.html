@@ -1,0 +1,11 @@
+<div id="statement__frame">
+  <h4>Confirmation Statement</h4>
+    <div  *ngIf="statement" [innerHTML]="statement.content | safeHtml" class="tiny_page"></div>
+    <div *ngFor="let answer of statement.answers">
+      <p>{{answer.question.title}} <b>{{answer.answer == "yes" ? 'Yes' : 'Not Applicable'}}</b></p>
+    </div>
+</div>
+
+<div class="col col__spantwo">
+<button class="btn btn__standard margin__bottom btn__print__pdf" (click)="printStatement()">Print Statement</button>
+</div>

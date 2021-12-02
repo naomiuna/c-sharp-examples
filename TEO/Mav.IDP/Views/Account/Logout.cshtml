@@ -1,0 +1,30 @@
+﻿@model LogoutViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<div class="page__header">
+    <img src="~/images/icons/users.svg" alt="Account" />
+    <h5>My Account</h5>
+</div>
+<p>Please confirm that you would like to log out?</p>
+
+<div class="logout-page">
+    <div class="row">
+        <div class="col-sm-6">
+            
+            <form asp-action="Logout" class="fill__form">
+                <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+                <div class="row">
+                    <div class="col col__spansix">
+                        <div class="formrow fill cf">
+                            <button class="btn btn__standard">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

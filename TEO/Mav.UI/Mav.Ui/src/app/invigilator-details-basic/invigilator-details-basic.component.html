@@ -1,0 +1,86 @@
+<div class="details divider__block__small">
+    <p><span class="bold">First Name:</span> {{userDetails.firstName}}</p>
+    <p><span class="bold">Last Name:</span> {{userDetails.surname}}</p>
+    <p><span class="bold">Email:</span> {{userDetails.email}}</p>
+    <p>
+        <span class="bold">Assessment Title: </span>
+        <span *ngIf="!!latestAssessment">{{latestAssessment.title}}</span>
+        <span *ngIf="latestAssessment === null">N/A</span>
+    </p>
+    <p>
+        <span class="bold">Assessment Status: </span>
+        <span *ngIf="!!latestAssessment">{{latestAssessment.statusID | assessmentstatus}}</span>
+        <span *ngIf="!!latestAssessment && !!latestAssessment.submittedOn"> ({{latestAssessment.submittedOn | date: 'dd/MM/yyyy'}})</span>
+        <span *ngIf="latestAssessment === null">N/A</span>
+    </p>
+</div>
+
+<div class="alert alert-account-success" *ngIf="contactUpdated">
+    <strong>Success!</strong> This account is now the main contact.
+</div>
+
+<!--Get the user by id and check role if EO then show-->
+<div *ngIf="!actionPending && isUserExamOfficer() && isSelectedExamOfficer && !isCurrentContact" class="row">
+    <div class="col col__spansix">
+        <a href="JavaScript:void(0);" class="btn btn__standard margin__bottom trigger__modal" data-modaltype="update_centre_contact">Make Main Centre Contact</a>
+    </div>
+</div>
+<div *ngIf="!actionPending && isUserExamOfficer() && isSelectedExamOfficer && isCurrentContact" class="row">
+    <div class="col col__spansix">
+        <a href="JavaScript:void(0);" class="btn btn__standard margin__bottom btn_disabled">Make Main Centre Contact (Currently the Main Contact)</a>
+    </div>
+</div>
+<div *ngIf="!actionPending" class="row">
+    <div class="col col__spansix">
+        <a href="JavaScript:void(0);" (click)='goToItem()' class="btn btn__standard margin__bottom">Edit User Details</a>
+    </div>
+</div>
+<div *ngIf="!actionPending"class="row">
+    <div class="col col__spansix">
+        <button class="btn btn__standard delete margin__bottom trigger__modal" data-modaltype="del_user_modal">
+            Delete User
+        </button>
+    </div>
+</div>
+<div class="spinner small" *ngIf="actionPending"></div>
+<section id="myModal" class="modal" data-modaltype="del_user_modal">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Delete User</h2>
+        <p>Are you sure you want to delete this user?</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='performDelete()' class="btn btn__standard delete cancel">Delete User</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a href="#" class="btn btn__standard cancel">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="myModal" class="modal" data-modaltype="update_centre_contact">
+    <div id="modal__content">
+        <span class="closeModal">&times;</span>
+        <h2>Change main centre contact?</h2>
+        <p>Are you sure you want to make this user to new main contact for the centre?</p>
+        <div class="row buttons">
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a *ngIf="!actionPending" href="JavaScript:void(0);" (click)='makeCentreContact()' class="btn btn__standard delete cancel">Yes</a>
+                    <div class="spinner small" *ngIf="actionPending"></div>
+                </div>
+            </div>
+            <div class="col col__spansix">
+                <div class="col__evenpad">
+                    <a href="#" class="btn btn__standard cancel">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

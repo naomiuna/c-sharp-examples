@@ -1,0 +1,17 @@
+<div class="listing">
+
+  <app-settings-list-item *ngFor="let setting of searchModel" [setting]="setting"></app-settings-list-item>
+
+  <div class="list__item" *ngIf="searchModel.length === 0">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <div class="list__info">
+            <p>{{loadingText}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

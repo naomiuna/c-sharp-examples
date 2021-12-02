@@ -1,0 +1,86 @@
+<div id="full__wrapper">
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="col col__spantwelve">
+        <div class="col__evenpad">
+          <ul class="inline__list">
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("")'>Dashboard</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToComponent("user-assessments")'>Assessments</a>
+            </li>
+            <li>
+              <a href="JavaScript:void(0);" (click)='goToAssessmentDetails()'>Assessments Details</a>
+            </li>
+            <li *ngIf="section.sectionCount > 1">
+              <a href="JavaScript:void(0);" (click)='goToSectionDetails()'>Section
+                {{userAssessmentSectionDetails.sectionNumber}}</a>
+            </li>
+            <li *ngIf="section.sectionCount === 1">
+                <a href="JavaScript:void(0);" (click)='goToSectionDetails()'>
+                    {{userAssessmentSectionDetails.sectionTitle}}</a>
+            </li>
+            <li>
+              <span>Summary</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content__contain">
+      <div class="divider__block">
+        <div class="page__header">
+          <img src="/assets/images/icons/assessments.svg" alt="Assessments" />
+          <h5><span *ngIf="section.sectionCount > 1">Section {{userAssessmentSectionDetails.sectionNumber}} - </span>{{userAssessmentSectionDetails.sectionTitle}}</h5>
+        </div>
+        <div class="gutter__small divider__block">
+          <h5 *ngIf="!!userAssessmentSectionDetails" class="totalscore">Summary: Highest Result <span>{{userAssessmentSectionDetails.score}}/{{userAssessmentSectionDetails.questionSetSize}}</span></h5>
+          <p>Here is a summary of your most recent answers:</p>
+          <div class="table__wrapper">
+            <app-user-assessment-section-summary-list [summary]="assessmentSectionSummary"></app-user-assessment-section-summary-list>
+          </div>
+          <div class="row divider__block__small">
+            <div class="col col__spantwelve">
+              <div class="col__evenpad">
+                <p *ngIf="!!userAssessmentSectionDetails" class="align__right bold">
+                  Most Recent Score {{recentScore}}/{{userAssessmentSectionDetails.questionSetSize}} 
+                  <span *ngIf="userAssessmentSectionDetails.passed === true">(Minimum Score Achieved)</span>
+                  <span *ngIf="userAssessmentSectionDetails.statusID === 4">(Maximum Attempts Exceeded)</span>
+                  <span *ngIf="userAssessmentSectionDetails.statusID === 5">(Time Reached)</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!actionPending" class="row buttons">
+            <div class="col col__spanfour">
+              <div class="col__evenpad">
+                <a *ngIf="((!!userAssessmentSectionDetails && userAssessmentSectionDetails.statusID < 3) 
+                          && (!!userAssessmentSectionDetails && userAssessmentSectionDetails.actionAllowed))" 
+                  href="JavaScript:void(0);" (click)='restartSection()' class="btn btn__standard">Restart</a>
+                <a *ngIf="((!!userAssessmentSectionDetails && userAssessmentSectionDetails.statusID === 3) 
+                          || (!!userAssessmentSectionDetails && !userAssessmentSectionDetails.actionAllowed)
+                          || (!!userAssessmentSectionDetails && userAssessmentSectionDetails.statusID === 4)
+                          || (!!userAssessmentSectionDetails && userAssessmentSectionDetails.statusID === 5))" 
+                  href="JavaScript:void(0);" class="btn btn__standard btn_disabled">Restart</a>
+              </div>
+            </div>
+            <div class="col col__spanfour">
+              <div class="col__evenpad">
+                <a href="JavaScript:void(0);" (click)='saveAndClose()' class="btn btn__standard">Save and Close</a>
+              </div>
+            </div>
+            <div class="col col__spanfour">
+              <div class="col__evenpad">
+                <a href="JavaScript:void(0);" (click)='saveAndContinue()' class="btn btn__details">Save and Continue</a>
+              </div>
+            </div>
+          </div>
+          <div class="spinner small" *ngIf="actionPending"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
